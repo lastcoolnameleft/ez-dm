@@ -78,18 +78,12 @@
             </div>
         </div>
 
-        <div data-role="popup" id="popupCreateCreature">
-          <ul data-role="listview">
-            <li>
-              <a href="#popupCreatePc" data-rel="popup" class="ui-btn-left" data-position-to="window">PC</a>
-            </li>
-            <li>
-              <a href="#popupCreateNpc" data-rel="popup" class="ui-btn-left" data-position-to="window">NPC</a>
-            </li>
-            <li>
-              <a href="#popupCreateEncounter" data-rel="popup" class="ui-btn-left" data-position-to="window">Encounter</a>
-            </li>
-          </ul>
+        <div data-role="popup" id="popupCreate">
+            <ul data-role="listview" data-inset="true" style="min-width:210px;" data-theme="b">
+                <li><a href="#popupCreatePc" data-rel="popup" class="ui-btn-left" data-position-to="window">PC</a></li>
+                <li><a href="#popupCreateNpc" data-rel="popup" class="ui-btn-left" data-position-to="window">NPC</a></li>
+                <li><a href="#popupCreateEncounter" data-rel="popup" class="ui-btn-left" data-position-to="window">Encounter</a></li>
+            </ul>
         </div>
 
         <div data-role="popup" id="popupCreatePc" data-theme="a" class="ui-corner-all">
@@ -161,8 +155,13 @@
                 <div style="padding:10px 20px;">
                     <h3>HP:</h3>
                     <div class="ui-grid-b">
+                        <div class="ui-block-a"><a href="#" data-role="button" data-mini="true">+1</a></div>
+                        <div class="ui-block-b"><a href="#" data-role="button" data-mini="true">10HP</a></div>
+                        <div class="ui-block-c"><a href="#" data-role="button" data-mini="true">-1</a></div>
+                    </div>
+                    <div class="ui-grid-b">
                         <div class="ui-block-a"><a href="index.html" data-role="button" data-mini="true">&#x2191;</a></div>
-                        <div class="ui-block-c"><label for="basic"></label><input type="text" name="name" id="basic" value="" data-mini="true" /></div>
+                        <div class="ui-block-b"><label for="basic"></label><input type="text" name="name" id="basic" value="" data-mini="true" /></div>
                         <div class="ui-block-c"><a href="index.html" data-role="button" data-mini="true">&#x2193;</a></div>
                     </div>
 
@@ -222,7 +221,7 @@
 
   <!-- Start Header -->
       <div data-theme="a" data-role="header">
-        <a data-role="button" href="#popupAddCreature" data-rel="popup" class="ui-btn-left" id="addCreatureButton" data-position-to="window">Add</a>
+        <a data-role="button" href="#popupAddCreature" data-rel="popup" class="ui-btn-left" id="addCreatureButton" data-position-to="origin">Add</a>
         <h3>Encounter of Death</h3>
         <a data-role="button" href="#popupEdit" data-rel="popup" class="ui-btn-right" data-position-to='origin'>Edit</a>
       </div>
@@ -235,12 +234,12 @@
 
             <li data-theme="c">
                 <a href="#popupEditPcEncounter" data-rel='popup'><img src="img/fry.jpg" /><h1>Umine</h1><p>HP:10/100 Init:20</p><span class="ui-li-count">AC: 20 For: 18 Ref: 15 Wil: 16</span></a>
-                <a href="#popupEditPc"></a>
+                <a href="#popupEditCreature" data-rel='popup'></a>
             </li>
 
             <li data-theme="c">
                 <a href="#popupEditPcEncounter" data-rel='popup'><img src="img/bender.png" /><h3>Eldon</h3><p>HP:10/100 Init:18</p><span class="ui-li-count">AC: 20 For: 18 Ref: 15 Wil: 16</span></a>
-                <a href='#'></a>
+                <a href="#popupEditCreature" data-rel='popup'></a>
             </li>
         </ul>
       </div>
@@ -248,7 +247,7 @@
 
   <!-- Start Footer -->
       <div data-theme="a" data-role="footer" data-position="fixed">
-        <a data-role="button" href="#popupCreateCreature" data-rel="popup" class="ui-btn-left" data-position-to="origin">Create</a>
+        <a data-role="button" href="#popupCreate" data-rel="popup" class="ui-btn-left" id='createButton' data-position-to="origin">Create</a>
         <h3>Footer</h3>
       </div>
   <!-- Start Footer -->
