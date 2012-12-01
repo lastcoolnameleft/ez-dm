@@ -18,6 +18,36 @@
     <div data-role="page" id="page1">
 
   <!-- Start Popup Data -->
+        <div data-role="popup" id="popupEdit">
+            <div data-role="collapsible-set" data-theme="b" data-content-theme="c" data-collapsed-icon="arrow-r"
+                data-expanded-icon="arrow-d" style="margin:0; width:250px;">
+                <div data-role="collapsible" data-inset="false">
+                    <h2>Edit PC</h2>
+                    <ul data-role="listview">
+                        <li><a href="#popupEditCreature" data-position-to="window" class="ui-btn-left" data-rel="popup">Eldon</a></li>
+                        <li><a href="#popupEditCreature" data-position-to="window" class="ui-btn-left" data-rel="popup">Umine</a></li>
+                        <li><a href="#popupEditCreature" data-position-to="window" class="ui-btn-left" data-rel="popup">Olren</a></li>
+                    </ul>
+                </div>
+                <div data-role="collapsible" data-inset="false">
+                    <h2>Edit NPC</h2>
+                    <ul data-role="listview">
+                        <li><a href="#popupEditCreature" data-position-to="window" class="ui-btn-left" data-rel="popup">Goblin</a></li>
+                        <li><a href="#popupEditCreature" data-position-to="window" class="ui-btn-left" data-rel="popup">Orc</a></li>
+                        <li><a href="#popupEditCreature" data-position-to="window" class="ui-btn-left" data-rel="popup">Moombean</a></li>
+                    </ul>
+                </div>
+                <div data-role="collapsible" data-inset="false">
+                    <h2>Edit Encounter</h2>
+                    <ul data-role="listview">
+                        <li><a href="#" data-rel="dialog">Introducing...</a></li>
+                        <li><a href="#" data-rel="dialog">Dicks of Doom</a></li>
+                        <li><a href="#" data-rel="dialog">Rock falls...</a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
         <div data-role="popup" id="popupAddCreature">
             <div data-role="collapsible-set" data-theme="b" data-content-theme="c" data-collapsed-icon="arrow-r"
                 data-expanded-icon="arrow-d" style="margin:0; width:250px;">
@@ -37,15 +67,15 @@
                         <li><a href="#" data-rel="dialog">Moonbeam BazookaTrooper</a></li>
                     </ul>
                 </div>
-            <div data-role="collapsible" data-inset="false">
-              <h2>Add Encounter</h2>
-              <ul data-role="listview">
-                <li><a href="#" data-rel="dialog">Introducing...</a></li>
-                <li><a href="#" data-rel="dialog">Dicks of Doom</a></li>
-                <li><a href="#" data-rel="dialog">Rock falls...</a></li>
-              </ul>
+                <div data-role="collapsible" data-inset="false">
+                    <h2>Add Encounter</h2>
+                    <ul data-role="listview">
+                        <li><a href="#" data-rel="dialog">Introducing...</a></li>
+                        <li><a href="#" data-rel="dialog">Dicks of Doom</a></li>
+                        <li><a href="#" data-rel="dialog">Rock falls...</a></li>
+                    </ul>
+                </div>
             </div>
-          </div>
         </div>
 
         <div data-role="popup" id="popupCreateCreature">
@@ -93,6 +123,56 @@
               <button type="submit" name="submit" value="submit" data-theme="b">Submit</button>
             </div>
           </form>
+        </div>
+
+        <div data-role="popup" id="popupEditCreature" data-theme="a" class="ui-corner-all" style="padding:10px 20px;">
+            <form>
+              <h3>Stats:</h3>
+              <label for="name" class="ui-hidden-accessible">Name:</label>
+              <input type="text" name="name" id="editPcName" value="" placeholder="Name" />
+
+              <label for="class" class="ui-hidden-accessible">Class:</label>
+              <input type="text" name="class" id="editPcClass" value="" placeholder="Class" />
+
+              <label for="level" class="ui-hidden-accessible">Level:</label>
+              <input type="text" name="level" id="editPcLevel" value="" placeholder="Level" />
+
+              <label for="class" class="ui-hidden-accessible">Max HP:</label>
+              <input type="text" name="initiative" id="editPcMaxHP" value="" placeholder="Max HP" />
+
+              <label for="class" class="ui-hidden-accessible">AC:</label>
+              <input type="text" name="ac" id="editPcAC" value="" placeholder="AC" />
+
+              <label for="class" class="ui-hidden-accessible">Fortitude:</label>
+              <input type="text" name="fortitude" id="editPcFortitude" value="" placeholder="Fortitude" />
+
+              <label for="class" class="ui-hidden-accessible">Reflex:</label>
+              <input type="text" name="reflex" id="editPcReflex" value="" placeholder="Reflex" />
+
+              <label for="class" class="ui-hidden-accessible">Will:</label>
+              <input type="text" name="will" id="editPcWill" value="" placeholder="Will" />
+
+              <button type="submit" name="submit" value="submit" data-theme="b">Submit</button>
+          </form>
+        </div>
+
+        <div data-role="popup" id="popupEditPcEncounter" data-theme="a" class="ui-corner-all">
+            <form>
+                <div style="padding:10px 20px;">
+                    <h3>HP:</h3>
+                    <div class="ui-grid-b">
+                        <div class="ui-block-a"><a href="index.html" data-role="button" data-mini="true">&#x2191;</a></div>
+                        <div class="ui-block-c"><label for="basic"></label><input type="text" name="name" id="basic" value="" data-mini="true" /></div>
+                        <div class="ui-block-c"><a href="index.html" data-role="button" data-mini="true">&#x2193;</a></div>
+                    </div>
+
+                    <h3>Initiative:</h3>
+                    <label for="level" class="ui-hidden-accessible">Initiative:</label>
+                    <input type="text" name="level" id="editPcInitiative" value="" placeholder="Initiative" />
+
+                    <button type="submit" name="submit" value="submit" data-theme="b">Submit</button>
+                </div>
+            </form>
         </div>
 
         <div data-role="popup" id="popupCreateNpc" data-theme="a" class="ui-corner-all">
@@ -144,22 +224,24 @@
       <div data-theme="a" data-role="header">
         <a data-role="button" href="#popupAddCreature" data-rel="popup" class="ui-btn-left" id="addCreatureButton" data-position-to="window">Add</a>
         <h3>Encounter of Death</h3>
-        <a data-role="button" href="#popupCreatePc" data-rel="popup" class="ui-btn-right">Edit</a>
+        <a data-role="button" href="#popupEdit" data-rel="popup" class="ui-btn-right" data-position-to='origin'>Edit</a>
       </div>
   <!-- End Header -->
 
   <!-- Start content -->
-      <div data-role="content">
+    <div data-role="content">
         <ul data-role="listview" data-divider-theme="b" data-split-icon="gear" data-split-theme="d" data-inset="true" id="sortable">
-          <li data-role="list-divider" role="heading">Divider</li>
-          <li data-theme="c">
-    <a href="#"><img src="http://lastcoolnameleft.com/jquery/fry.jpg" /><h1>Umine</h1><p>HP:10/100 Init:20</p><span class="ui-li-count">AC: 20 For: 18 Ref: 15 Wil: 16</span></a>
-    <a href="#"></a>
-          </li>
-          <li data-theme="c">
-    <a href="#"><img src="http://lastcoolnameleft.com/jquery/bender.png" /><h3>Eldon</h3><p>HP:10/100 Init:18</p><span class="ui-li-count">AC: 20 For: 18 Ref: 15 Wil: 16</span></a>
-    <a href='#'></a>
-    </li>
+            <li data-role="list-divider" role="heading">Divider</li>
+
+            <li data-theme="c">
+                <a href="#popupEditPcEncounter" data-rel='popup'><img src="http://lastcoolnameleft.com/jquery/fry.jpg" /><h1>Umine</h1><p>HP:10/100 Init:20</p><span class="ui-li-count">AC: 20 For: 18 Ref: 15 Wil: 16</span></a>
+                <a href="#popupEditPc"></a>
+            </li>
+
+            <li data-theme="c">
+                <a href="#popupEditPcEncounter" data-rel='popup'><img src="http://lastcoolnameleft.com/jquery/bender.png" /><h3>Eldon</h3><p>HP:10/100 Init:18</p><span class="ui-li-count">AC: 20 For: 18 Ref: 15 Wil: 16</span></a>
+                <a href='#'></a>
+            </li>
         </ul>
       </div>
   <!-- End content -->
