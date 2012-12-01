@@ -16,132 +16,169 @@
   <body>
     <!-- Home -->
     <div data-role="page" id="page1">
-      <div data-theme="a" data-role="header">
-        <a data-role="button" href="#popupAddCreature"
-        data-rel="popup" class="ui-btn-left" id="addCreatureButton"
-        data-position-to="window">Add</a>
+
+  <!-- Start Popup Data -->
         <div data-role="popup" id="popupAddCreature">
-          <div data-role="collapsible-set" data-theme="b"
-          data-content-theme="c" data-collapsed-icon="arrow-r"
-          data-expanded-icon="arrow-d"
-          style="margin:0; width:250px;">
+          <div data-role="collapsible-set" data-theme="b" data-content-theme="c" data-collapsed-icon="arrow-r"
+          data-expanded-icon="arrow-d" style="margin:0; width:250px;">
             <div data-role="collapsible" data-inset="false">
               <h2>Add PC</h2>
               <ul data-role="listview">
-                <li>
-                  <a href="#" data-rel="dialog">Eldon</a>
-                </li>
-                <li>
-                  <a href="#" data-rel="dialog">Umine</a>
-                </li>
-                <li>
-                  <a href="#" data-rel="dialog">Olren</a>
-                </li>
+                <li><a href="#" data-rel="dialog">Eldon</a></li>
+                <li><a href="#" data-rel="dialog">Umine</a></li>
+                <li><a href="#" data-rel="dialog">Olren</a></li>
               </ul>
             </div>
             <div data-role="collapsible" data-inset="false">
               <h2>Add NPC</h2>
               <ul data-role="listview">
-                <li>
-                  <a href="#" data-rel="dialog">Goblin</a>
-                </li>
-                <li>
-                  <a href="#" data-rel="dialog">Orc</a>
-                </li>
-                <li>
-                  <a href="#" data-rel="dialog">Moonbeam Bazooka
-                  Trooper</a>
+                <li><a href="#" data-rel="dialog">Goblin</a></li>
+                <li><a href="#" data-rel="dialog">Orc</a></li>
+                <li><a href="#" data-rel="dialog">Moonbeam BazookaTrooper</a>
                 </li>
               </ul>
             </div>
             <div data-role="collapsible" data-inset="false">
               <h2>Add Encounter</h2>
               <ul data-role="listview">
-                <li>
-                  <a href="#" data-rel="dialog">Introducing...</a>
-                </li>
-                <li>
-                  <a href="#" data-rel="dialog">Dicks of Doom</a>
-                </li>
-                <li>
-                  <a href="#" data-rel="dialog">Rock falls...</a>
-                </li>
+                <li><a href="#" data-rel="dialog">Introducing...</a></li>
+                <li><a href="#" data-rel="dialog">Dicks of Doom</a></li>
+                <li><a href="#" data-rel="dialog">Rock falls...</a></li>
               </ul>
             </div>
           </div>
         </div>
+
         <div data-role="popup" id="popupCreateCreature">
           <ul data-role="listview">
             <li>
-              <a href="#popupCreatePc" data-rel="popup"
-              class="ui-btn-left" data-position-to="window">PC</a>
+              <a href="#popupCreatePc" data-rel="popup" class="ui-btn-left" data-position-to="window">PC</a>
             </li>
             <li>
-              <a href="#popupCreateNpc" data-rel="popup"
-              class="ui-btn-left" data-position-to="window">NPC</a>
+              <a href="#popupCreateNpc" data-rel="popup" class="ui-btn-left" data-position-to="window">NPC</a>
             </li>
             <li>
-              <a href="#popupCreateEncounter" data-rel="popup"
-              class="ui-btn-left" data-position-to="window">
-              Encounter</a>
+              <a href="#popupCreateEncounter" data-rel="popup" class="ui-btn-left" data-position-to="window">Encounter</a>
             </li>
           </ul>
         </div>
-        <div data-role="popup" id="popupCreatePc" data-theme="a"
-        class="ui-corner-all">
+
+        <div data-role="popup" id="popupCreatePc" data-theme="a" class="ui-corner-all">
           <form>
             <div style="padding:10px 20px;">
               <h3>Create New PC:</h3>
-              <label for="name" class="ui-hidden-accessible">
-              Name:</label>
-              <input type="text" name="name" id="createPcName"
-              value="" placeholder="Name" />
-              <label for="class" class="ui-hidden-accessible">
-              Class:</label>
-              <input type="text" name="class" id="createPcClass"
-              value="" placeholder="Class" />
-              <label for="level" class="ui-hidden-accessible">
-              Level:</label>
-              <input type="text" name="level" id="createPcLevel"
-              value="" placeholder="Level" />
-              <label for="class" class="ui-hidden-accessible">
-              Initiative:</label>
-              <input type="text" name="initiative"
-              id="createPcInitiative" value=""
-              placeholder="Initiative" />
-              <button type="submit" name="submit" value="submit"
-              data-theme="b">Submit</button>
+              <label for="name" class="ui-hidden-accessible">Name:</label>
+              <input type="text" name="name" id="createPcName" value="" placeholder="Name" />
+
+              <label for="class" class="ui-hidden-accessible">Class:</label>
+              <input type="text" name="class" id="createPcClass" value="" placeholder="Class" />
+
+              <label for="level" class="ui-hidden-accessible">Level:</label>
+              <input type="text" name="level" id="createPcLevel" value="" placeholder="Level" />
+
+              <label for="class" class="ui-hidden-accessible">Max HP:</label>
+              <input type="text" name="initiative" id="createPcMaxHP" value="" placeholder="Max HP" />
+
+              <label for="class" class="ui-hidden-accessible">Initiative:</label>
+              <input type="text" name="initiative" id="createPcInitiative" value="" placeholder="Initiative" />
+
+              <label for="class" class="ui-hidden-accessible">AC:</label>
+              <input type="text" name="ac" id="createPcAC" value="" placeholder="AC" />
+
+              <label for="class" class="ui-hidden-accessible">Fortitude:</label>
+              <input type="text" name="fortitude" id="createPcFortitude" value="" placeholder="Fortitude" />
+
+              <label for="class" class="ui-hidden-accessible">Reflex:</label>
+              <input type="text" name="reflex" id="createPcReflex" value="" placeholder="Reflex" />
+
+              <label for="class" class="ui-hidden-accessible">Will:</label>
+              <input type="text" name="will" id="createPcWill" value="" placeholder="Will" />
+
+              <button type="submit" name="submit" value="submit" data-theme="b">Submit</button>
             </div>
           </form>
         </div>
+
+        <div data-role="popup" id="popupCreateNpc" data-theme="a" class="ui-corner-all">
+          <form>
+            <div style="padding:10px 20px;">
+              <h3>Create New NPC:</h3>
+              <label for="name" class="ui-hidden-accessible">Name:</label>
+              <input type="text" name="name" id="createNpcName" value="" placeholder="Name" />
+
+              <label for="class" class="ui-hidden-accessible">Class:</label>
+              <input type="text" name="class" id="createNpcClass" value="" placeholder="Class" />
+
+              <label for="level" class="ui-hidden-accessible">Level:</label>
+              <input type="text" name="level" id="createNpcLevel" value="" placeholder="Level" />
+
+              <label for="class" class="ui-hidden-accessible">Max HP:</label>
+              <input type="text" name="initiative" id="createNpcMaxHP" value="" placeholder="Max HP" />
+
+              <label for="class" class="ui-hidden-accessible">Initiative:</label>
+              <input type="text" name="initiative" id="createNpcInitiative" value="" placeholder="Initiative" />
+
+              <label for="class" class="ui-hidden-accessible">AC:</label>
+              <input type="text" name="ac" id="createNpcAC" value="" placeholder="AC" />
+
+              <label for="class" class="ui-hidden-accessible">Fortitude:</label>
+              <input type="text" name="fortitude" id="createNpcFortitude" value="" placeholder="Fortitude" />
+
+              <label for="class" class="ui-hidden-accessible">Reflex:</label>
+              <input type="text" name="reflex" id="createNpcReflex" value="" placeholder="Reflex" />
+
+              <label for="class" class="ui-hidden-accessible">Will:</label>
+              <input type="text" name="will" id="createNpcWill" value="" placeholder="Will" />
+
+              <button type="submit" name="submit" value="submit" data-theme="b">Submit</button>
+            </div>
+          </form>
+        </div>
+
+        <div data-role="popup" id="popupCreateEncounter" data-theme="a" class="ui-corner-all">
+    <form>
+      <div style="padding:10px 20px;">
+        <h3>Create New Encounter:</h3>
+                <label for="name" class="ui-hidden-accessible">Name:</label>
+    <input type='text' name='name' id='createEncounterName' value='' placeholer='name' />
+          <button type='submit' name='submit' value='submit' data-theme='b'>Submit</button>
+            </div>
+          </form>
+        </div>
+  <!-- End Popup Data -->
+
+  <!-- Start Header -->
+      <div data-theme="a" data-role="header">
+        <a data-role="button" href="#popupAddCreature" data-rel="popup" class="ui-btn-left" id="addCreatureButton" data-position-to="window">Add</a>
         <h3>Encounter of Death</h3>
-        <a data-role="button" href="#popupCreatePc"
-        data-rel="popup" class="ui-btn-right">Edit</a>
-</div>
+        <a data-role="button" href="#popupCreatePc" data-rel="popup" class="ui-btn-right">Edit</a>
+      </div>
+  <!-- End Header -->
+
+  <!-- Start content -->
       <div data-role="content">
-        <ul data-role="listview" data-divider-theme="b" data-split-icon="gear" data-split-theme="d"
-        data-inset="true" id="sortable">
+        <ul data-role="listview" data-divider-theme="b" data-split-icon="gear" data-split-theme="d" data-inset="true" id="sortable">
           <li data-role="list-divider" role="heading">Divider</li>
-          <li data-theme="c"><a href="#"><h1>Umine </h1> <p>HP:10/100 Init:20</p>
-<img src="http://lastcoolnameleft.com/jquery/fry.jpg" />
-	          <span class="ui-li-count">AC: 20 For: 18 Ref: 15 Wil: 16</span>
-	</a><a href="#"></a>
-		  </li>
-          <li data-theme="c"><a href="#"><h3>Eldon</h3> <p>HP:10/100 Init:18</p>
-<img src="http://lastcoolnameleft.com/jquery/bender.png" />
-          	<span class="ui-li-count">AC: 20 For: 18 Ref: 15 Wil: 16</span>
-</a><a href='#'></a>
-		  </li>
+          <li data-theme="c">
+    <a href="#"><img src="http://lastcoolnameleft.com/jquery/fry.jpg" /><h1>Umine</h1><p>HP:10/100 Init:20</p><span class="ui-li-count">AC: 20 For: 18 Ref: 15 Wil: 16</span></a>
+    <a href="#"></a>
+          </li>
+          <li data-theme="c">
+    <a href="#"><img src="http://lastcoolnameleft.com/jquery/bender.png" /><h3>Eldon</h3><p>HP:10/100 Init:18</p><span class="ui-li-count">AC: 20 For: 18 Ref: 15 Wil: 16</span></a>
+    <a href='#'></a>
+    </li>
         </ul>
       </div>
+  <!-- End content -->
+
+  <!-- Start Footer -->
       <div data-theme="a" data-role="footer" data-position="fixed">
-        <a data-role="button" href="#popupCreateCreature"
-        data-rel="popup" class="ui-btn-left"
-        data-position-to="origin">Create</a>
+        <a data-role="button" href="#popupCreateCreature" data-rel="popup" class="ui-btn-left" data-position-to="origin">Create</a>
         <h3>Footer</h3>
       </div>
+  <!-- Start Footer -->
+      </div>
 </div>
-    </div>
     <script>//App custom javascript</script>
   </body>
 </html>
