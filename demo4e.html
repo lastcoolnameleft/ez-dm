@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport"
+    content="width=device-width, initial-scale=1" />
+    <title></title>
+    <link rel="stylesheet" href="https://ajax.aspnetcdn.com/ajax/jquery.mobile/1.2.0/jquery.mobile-1.2.0.min.css" />
+    <link rel="stylesheet" href="my.css" />
+    <style>/* App custom styles */</style>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
+    <script src="https://ajax.aspnetcdn.com/ajax/jquery.mobile/1.2.0/jquery.mobile-1.2.0.min.js"></script>
+    <script src="my.js"></script>
+    <script src="jquery.ui.touch-punch.min.js"></script>
+ </head>
+  <body>
+    <!-- Home -->
+    <div data-role="page" id="page1">
+      <div data-theme="a" data-role="header">
+        <a data-role="button" href="#popupAddCreature"
+        data-rel="popup" class="ui-btn-left" id="addCreatureButton"
+        data-position-to="window">Add</a>
+        <div data-role="popup" id="popupAddCreature">
+          <div data-role="collapsible-set" data-theme="b"
+          data-content-theme="c" data-collapsed-icon="arrow-r"
+          data-expanded-icon="arrow-d"
+          style="margin:0; width:250px;">
+            <div data-role="collapsible" data-inset="false">
+              <h2>Add PC</h2>
+              <ul data-role="listview">
+                <li>
+                  <a href="#" data-rel="dialog">Eldon</a>
+                </li>
+                <li>
+                  <a href="#" data-rel="dialog">Umine</a>
+                </li>
+                <li>
+                  <a href="#" data-rel="dialog">Olren</a>
+                </li>
+              </ul>
+            </div>
+            <div data-role="collapsible" data-inset="false">
+              <h2>Add NPC</h2>
+              <ul data-role="listview">
+                <li>
+                  <a href="#" data-rel="dialog">Goblin</a>
+                </li>
+                <li>
+                  <a href="#" data-rel="dialog">Orc</a>
+                </li>
+                <li>
+                  <a href="#" data-rel="dialog">Moonbeam Bazooka
+                  Trooper</a>
+                </li>
+              </ul>
+            </div>
+            <div data-role="collapsible" data-inset="false">
+              <h2>Add Encounter</h2>
+              <ul data-role="listview">
+                <li>
+                  <a href="#" data-rel="dialog">Introducing...</a>
+                </li>
+                <li>
+                  <a href="#" data-rel="dialog">Dicks of Doom</a>
+                </li>
+                <li>
+                  <a href="#" data-rel="dialog">Rock falls...</a>
+                </li>
+              </ul>
+            </div>
+          </div>
+        </div>
+        <div data-role="popup" id="popupCreateCreature">
+          <ul data-role="listview">
+            <li>
+              <a href="#popupCreatePc" data-rel="popup"
+              class="ui-btn-left" data-position-to="window">PC</a>
+            </li>
+            <li>
+              <a href="#popupCreateNpc" data-rel="popup"
+              class="ui-btn-left" data-position-to="window">NPC</a>
+            </li>
+            <li>
+              <a href="#popupCreateEncounter" data-rel="popup"
+              class="ui-btn-left" data-position-to="window">
+              Encounter</a>
+            </li>
+          </ul>
+        </div>
+        <div data-role="popup" id="popupCreatePc" data-theme="a"
+        class="ui-corner-all">
+          <form>
+            <div style="padding:10px 20px;">
+              <h3>Create New PC:</h3>
+              <label for="name" class="ui-hidden-accessible">
+              Name:</label>
+              <input type="text" name="name" id="createPcName"
+              value="" placeholder="Name" />
+              <label for="class" class="ui-hidden-accessible">
+              Class:</label>
+              <input type="text" name="class" id="createPcClass"
+              value="" placeholder="Class" />
+              <label for="level" class="ui-hidden-accessible">
+              Level:</label>
+              <input type="text" name="level" id="createPcLevel"
+              value="" placeholder="Level" />
+              <label for="class" class="ui-hidden-accessible">
+              Initiative:</label>
+              <input type="text" name="initiative"
+              id="createPcInitiative" value=""
+              placeholder="Initiative" />
+              <button type="submit" name="submit" value="submit"
+              data-theme="b">Submit</button>
+            </div>
+          </form>
+        </div>
+        <h3>Encounter of Death</h3>
+        <a data-role="button" href="#popupCreatePc"
+        data-rel="popup" class="ui-btn-right">Edit</a>
+</div>
+      <div data-role="content">
+        <ul data-role="listview" data-divider-theme="b" data-split-icon="gear" data-split-theme="d"
+        data-inset="true" id="sortable">
+          <li data-role="list-divider" role="heading">Divider</li>
+          <li data-theme="c"><a href="#"><h1>Umine </h1> <p>HP:10/100 Init:20</p>
+<img src="http://lastcoolnameleft.com/jquery/fry.jpg" />
+	          <span class="ui-li-count">AC: 20 For: 18 Ref: 15 Wil: 16</span>
+	</a><a href="#"></a>
+		  </li>
+          <li data-theme="c"><a href="#"><h3>Eldon</h3> <p>HP:10/100 Init:18</p>
+<img src="http://lastcoolnameleft.com/jquery/bender.png" />
+          	<span class="ui-li-count">AC: 20 For: 18 Ref: 15 Wil: 16</span>
+</a><a href='#'></a>
+		  </li>
+        </ul>
+      </div>
+      <div data-theme="a" data-role="footer" data-position="fixed">
+        <a data-role="button" href="#popupCreateCreature"
+        data-rel="popup" class="ui-btn-left"
+        data-position-to="origin">Create</a>
+        <h3>Footer</h3>
+      </div>
+</div>
+    </div>
+    <script>//App custom javascript</script>
+  </body>
+</html>
