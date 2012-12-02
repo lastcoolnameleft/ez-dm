@@ -21,6 +21,7 @@ getCreatureListFromEncounter = function(encounterId, encounterList, pcList, npcL
     return creatureList;
 }
 
+
 function sortByInitiative(a, b) {
     return( b.initiative - a.initiative );
 }
@@ -47,15 +48,22 @@ initApp = function () {
     addPopupBindings();
     activeCreatureList = getCreatureListFromEncounter(activeEncounterId, encounterList, pcList, npcList);
     addCreaturesToEncounterList(activeCreatureList);
-    setEncounterName('Dicks of Doom');
+    setEncounterName(encounterList[activeEncounterId]['name']);
+}
+
+datafillPopup = function(divId, dataRel, link, list) {
+    $(divId + ' ul').html('');
+    for ( id in list) {
+        $(divId + ' ul').append('<li><a href="' + link + '" data-position-to="window" class="ui-btn-left" data-rel="' + dataRel + '">' + list[id]['name'] + '</a></li>').listview('refresh');
+    }
 }
 
 // http://stackoverflow.com/questions/8399882/jquery-mobile-collapsible-expand-collapse-event
-//$('#popupEditPc ul').append('<li><a href="#popupEditCreature" data-position-to="window" class="ui-btn-left" data-rel="popup">Eldon2</a></li>').listview('refresh');
-
 addPopupBindings = function() {
-        $('#popupEditPc').bind('expand', function () {
-            alert('Expanded');
-        });
-
+    $('#popupEditPc').bind('expand', function () { datafillPopup('#popupEditPc', 'popup', '#popupEditCreature', pcList) });
+    $('#popupEditNpc').bind('expand', function () { datafillPopup('#popupEditNpc', 'popup', '#popupEditCreature', npcList) });
+    $('#popupEditEncounter').bind('expand', function () { datafillPopup('#popupEditEncounter', 'popup', '#popupEditEncounter', encounterList) });
+    $('#popupAddPc').bind('expand', function () { datafillPopup('#popupAddPc', 'dialog', 'addCreature.html', pcList) });
+    $('#popupAddNpc').bind('expand', function () { datafillPopup('#popupAddNpc', 'dialog', 'addCreature.html', npcList) });
+    $('#popupAddEncounter').bind('expand', function () { datafillPopup('#popupAddEncounter', 'dialog', '#popupAddEncounter', encounterList) });
 }
