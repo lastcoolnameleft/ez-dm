@@ -37,7 +37,7 @@
             </div>
         </div>
 
-        <div data-role="popup" id="popupAddCreature">
+        <div data-role="popup" id="popupAdd">
             <div data-role="collapsible-set" data-theme="b" data-content-theme="c" data-collapsed-icon="arrow-r"
                 data-expanded-icon="arrow-d" style="margin:0; width:250px;">
                 <div data-role="collapsible" data-inset="false" id='popupAddPc'>
@@ -77,10 +77,10 @@
               <input type="text" name="level" id="createPcLevel" value="" placeholder="Level" />
 
               <label for="class" class="ui-hidden-accessible">Max HP:</label>
-              <input type="text" name="initiative" id="createPcMaxHP" value="" placeholder="Max HP" />
+              <input type="text" name="initiative" id="createPcMaxHp" value="" placeholder="Max HP" />
 
               <label for="class" class="ui-hidden-accessible">AC:</label>
-              <input type="text" name="ac" id="createPcAC" value="" placeholder="AC" />
+              <input type="text" name="ac" id="createPcAc" value="" placeholder="AC" />
 
               <label for="class" class="ui-hidden-accessible">Fortitude:</label>
               <input type="text" name="fortitude" id="createPcFortitude" value="" placeholder="Fortitude" />
@@ -91,7 +91,7 @@
               <label for="class" class="ui-hidden-accessible">Will:</label>
               <input type="text" name="will" id="createPcWill" value="" placeholder="Will" />
 
-              <button type="submit" name="submit" value="submit" data-theme="b">Submit</button>
+              <input type="button" name="submit" value="submit" data-theme="b" id='createPcButton' />
             </div>
           </form>
         </div>
@@ -109,10 +109,10 @@
               <input type="text" name="level" id="editPcLevel" value="" placeholder="Level" />
 
               <label for="class" class="ui-hidden-accessible">Max HP:</label>
-              <input type="text" name="initiative" id="editPcMaxHP" value="" placeholder="Max HP" />
+              <input type="text" name="initiative" id="editPcMaxHp" value="" placeholder="Max HP" />
 
               <label for="class" class="ui-hidden-accessible">AC:</label>
-              <input type="text" name="ac" id="editPcAC" value="" placeholder="AC" />
+              <input type="text" name="ac" id="editPcAc" value="" placeholder="AC" />
 
               <label for="class" class="ui-hidden-accessible">Fortitude:</label>
               <input type="text" name="fortitude" id="editPcFortitude" value="" placeholder="Fortitude" />
@@ -123,7 +123,7 @@
               <label for="class" class="ui-hidden-accessible">Will:</label>
               <input type="text" name="will" id="editPcWill" value="" placeholder="Will" />
 
-              <button type="submit" name="submit" value="submit" data-theme="b">Submit</button>
+              <input type="button" name="submit" value="submit" data-theme="b" id='editPcButton' />
           </form>
         </div>
 
@@ -145,8 +145,7 @@
                     <h3>Initiative:</h3>
                     <label for="level" class="ui-hidden-accessible">Initiative:</label>
                     <input type="text" name="level" id="editPcInitiative" value="" placeholder="Initiative" />
-
-                    <button type="submit" name="submit" value="submit" data-theme="b">Submit</button>
+                    <input type="button" name="submit" value="submit" id='editPcEncounterButton' data-theme="b" />
                 </div>
             </form>
         </div>
@@ -165,10 +164,10 @@
               <input type="text" name="level" id="createNpcLevel" value="" placeholder="Level" />
 
               <label for="class" class="ui-hidden-accessible">Max HP:</label>
-              <input type="text" name="initiative" id="createNpcMaxHP" value="" placeholder="Max HP" />
+              <input type="text" name="initiative" id="createNpcMaxHp" value="" placeholder="Max Hp" />
 
               <label for="class" class="ui-hidden-accessible">AC:</label>
-              <input type="text" name="ac" id="createNpcAC" value="" placeholder="AC" />
+              <input type="text" name="ac" id="createNpcAc" value="" placeholder="AC" />
 
               <label for="class" class="ui-hidden-accessible">Fortitude:</label>
               <input type="text" name="fortitude" id="createNpcFortitude" value="" placeholder="Fortitude" />
@@ -179,7 +178,7 @@
               <label for="class" class="ui-hidden-accessible">Will:</label>
               <input type="text" name="will" id="createNpcWill" value="" placeholder="Will" />
 
-              <button type="submit" name="submit" value="submit" data-theme="b">Submit</button>
+              <input type="button" name="submit" value="submit" data-theme="b" id='createNpcButton' />
             </div>
           </form>
         </div>
@@ -190,7 +189,7 @@
                     <h3>Create New Encounter:</h3>
                     <label for="name" class="ui-hidden-accessible">Name:</label>
                     <input type='text' name='name' id='createEncounterName' value='' placeholer='name' />
-                    <button type='submit' name='submit' value='submit' data-theme='b'>Submit</button>
+                    <input type='button' name='submit' value='submit' id='createEncounterButton' data-theme='b' />
                 </div>
             </form>
         </div>
@@ -198,7 +197,7 @@
 
   <!-- Start Header -->
       <div data-theme="a" data-role="header">
-        <a data-role="button" href="#popupAddCreature" data-rel="popup" class="ui-btn-left" id="addCreatureButton" data-position-to="origin">Add</a>
+        <a data-role="button" href="#popupAdd" data-rel="popup" class="ui-btn-left" id="addCreatureButton" data-position-to="origin">Add</a>
         <h3 id='headerEncounterName'>Encounter</h3>
         <a data-role="button" href="#popupEdit" data-rel="popup" class="ui-btn-right" data-position-to='origin'>Edit</a>
       </div>

@@ -1,5 +1,14 @@
-addUser = function (name, currentHP, maxHP, initiative, ac, fortitude, reflex, will, imgUrl) {
-    liString = '<li data-theme="c"><a href="#popupEditPcEncounter" data-rel="popup"><img src="' + imgUrl + '" /><h1>' + name + '</h1><p>HP:' + currentHP + '/' + maxHP + 'Init:' + initiative + '</p><span class="ui-li-count">AC: ' + ac + ' For: ' + fortitude + ' Ref: ' + reflex + ' Wil: ' + will + '</span></a><a href="#popupEditCreature" data-rel="popup"></a></li>';
+initApp = function () {
+    setDummyData();
+    datafillCreateFields();
+    addPopupBindings();
+    activeCreatureList = getCreatureListFromEncounter(activeEncounterId, encounterList, pcList, npcList);
+    addCreaturesToEncounterList(activeCreatureList);
+    setEncounterName(encounterList[activeEncounterId]['name']);
+}
+
+addUser = function (name, currentHp, maxHp, initiative, ac, fortitude, reflex, will, imgUrl) {
+    liString = '<li data-theme="c"><a href="#popupEditPcEncounter" data-rel="popup"><img src="' + imgUrl + '" /><h1>' + name + '</h1><p>HP:' + currentHp + '/' + maxHp + 'Init:' + initiative + '</p><span class="ui-li-count">AC: ' + ac + ' For: ' + fortitude + ' Ref: ' + reflex + ' Wil: ' + will + '</span></a><a href="#popupEditCreature" data-rel="popup"></a></li>';
     $( '#sortable' ).append(liString).listview("refresh");
 }
 
@@ -21,8 +30,7 @@ getCreatureListFromEncounter = function(encounterId, encounterList, pcList, npcL
     return creatureList;
 }
 
-
-function sortByInitiative(a, b) {
+sortByInitiative = function(a, b) {
     return( b.initiative - a.initiative );
 }
 
@@ -38,18 +46,10 @@ getEncounterList = function() {
 addCreaturesToEncounterList = function(creatureList) { 
     sortedCreatureList = creatureList.sort(sortByInitiative);
     for ( var creatureId in sortedCreatureList ) {
-        addUser(creatureList[creatureId]['name'], creatureList[creatureId]['currentHP'], creatureList[creatureId]['maxHP'], creatureList[creatureId]['initiative'], creatureList[creatureId]['ac'], creatureList[creatureId]['fortitude'], creatureList[creatureId]['reflex'], creatureList[creatureId]['will'], creatureList[creatureId]['imgUrl']);
+        addUser(creatureList[creatureId]['name'], creatureList[creatureId]['currentHp'], creatureList[creatureId]['maxHp'], creatureList[creatureId]['initiative'], creatureList[creatureId]['ac'], creatureList[creatureId]['fortitude'], creatureList[creatureId]['reflex'], creatureList[creatureId]['will'], creatureList[creatureId]['imgUrl']);
     }
 }
 
-
-initApp = function () {
-    setDummyData();
-    addPopupBindings();
-    activeCreatureList = getCreatureListFromEncounter(activeEncounterId, encounterList, pcList, npcList);
-    addCreaturesToEncounterList(activeCreatureList);
-    setEncounterName(encounterList[activeEncounterId]['name']);
-}
 
 datafillPopup = function(divId, dataRel, link, list) {
     $(divId + ' ul').html('');
@@ -58,12 +58,63 @@ datafillPopup = function(divId, dataRel, link, list) {
     }
 }
 
+submitCreateEncounter = function() {
+    $( "#popupCreateEncounter" ).popup( "close" );
+    var encounterName = $( '#createEncounterName' ).val();
+    createEncounter(encounterName);     
+}
+
+submitCreatePc = function() {
+    $( "#popupCreatePc" ).popup( "close" );
+    var newPcInfo = { 
+        'name'       : $( '#createPcName' ).val(), 
+        'maxHp'      : $( '#createPcMaxHp' ).val(), 
+        'initiative' : 0, 
+        'ac'         : $( '#createPcAc' ).val(), 
+        'fortitude'  : $( '#createPcFortitude' ).val(),
+        'reflex'     : $( '#createPcReflex' ).val(), 
+        'will'       : $( '#createPcWill' ).val(), 
+        'imgUrl'     : 'img/leela.jpg'
+    };
+    pcList[ nextPcListId ] = newPcInfo;
+    nextPcListId++;
+}
+
+submitCreateNpc = function() {
+    $( "#popupCreatePc" ).popup( "close" );
+    var newNpcInfo = { 
+        'name'       : $( '#createNpcName' ).val(), 
+        'maxHp'      : $( '#createNpcMaxHp' ).val(), 
+        'initiative' : 0, 
+        'ac'         : $( '#createNpcAc' ).val(), 
+        'fortitude'  : $( '#createNpcFortitude' ).val(),
+        'reflex'     : $( '#createNpcReflex' ).val(), 
+        'will'       : $( '#createNpcWill' ).val(), 
+        'imgUrl'     : 'img/nibbler.jpg'
+    };
+    npcList[ nextNpcListId ] = newNpcInfo;
+    nextNpcListId++;
+}
+
 // http://stackoverflow.com/questions/8399882/jquery-mobile-collapsible-expand-collapse-event
+// http://jquerymobile.com/demos/1.2.0/docs/pages/popup/events.html
 addPopupBindings = function() {
-    $('#popupEditPc').bind('expand', function () { datafillPopup('#popupEditPc', 'popup', '#popupEditCreature', pcList) });
-    $('#popupEditNpc').bind('expand', function () { datafillPopup('#popupEditNpc', 'popup', '#popupEditCreature', npcList) });
-    $('#popupEditEncounter').bind('expand', function () { datafillPopup('#popupEditEncounter', 'popup', '#popupEditEncounter', encounterList) });
-    $('#popupAddPc').bind('expand', function () { datafillPopup('#popupAddPc', 'dialog', 'addCreature.html', pcList) });
-    $('#popupAddNpc').bind('expand', function () { datafillPopup('#popupAddNpc', 'dialog', 'addCreature.html', npcList) });
-    $('#popupAddEncounter').bind('expand', function () { datafillPopup('#popupAddEncounter', 'dialog', '#popupAddEncounter', encounterList) });
+    $('#popupEdit').on('popupbeforeposition', function () { datafillPopup('#popupEditPc', 'popup', '#popupEditCreature', pcList) });
+    $('#popupEdit').on('popupbeforeposition', function () { datafillPopup('#popupEditNpc', 'popup', '#popupEditCreature', npcList) });
+    $('#popupEdit').on('popupbeforeposition', function () { datafillPopup('#popupEditEncounter', 'popup', '#popupEditEncounter', encounterList) });
+    $('#popupAdd').on('popupbeforeposition', function () { datafillPopup('#popupAddPc', 'dialog', 'addCreature.html', pcList) });
+    $('#popupAdd').on('popupbeforeposition', function () { datafillPopup('#popupAddNpc', 'dialog', 'addCreature.html', npcList) });
+    $('#popupAdd').on('popupbeforeposition', function () { datafillPopup('#popupAddEncounter', 'dialog', '#popupAddEncounter', encounterList) });
+    $('#createPcButton').on('click', function () { submitCreatePc() });
+    $('#createNpcButton').on('click', function () { submitCreateNpc() });
+    $('#createEncounterButton').on('click', function () { submitCreateEncounter() });
+}
+
+createPc = function( name, maxHp, initiative, ac, fortitude, reflex, will, imgUrl ) {
+}
+
+createEncounter = function( name ) {
+    var encounterInfo = { 'name' : name, 'pcList' : [], 'npcList' : [] };
+    encounterList[ nextEncounterListId ] = encounterInfo;
+    nextEncounterListId++;
 }

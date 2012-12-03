@@ -1,7 +1,27 @@
+datafillCreateFields = function() {
+    $('#createPcName').val('PC #10');
+    $('#createPcClass').val('Fighter');
+    $('#createPcLevel').val(8);
+    $('#createPcMaxHp').val(200);
+    $('#createPcAc').val(23);
+    $('#createPcFortitude').val(19);
+    $('#createPcReflex').val(17);
+    $('#createPcWill').val(18);
+    $('#createNpcName').val('NPC #10');
+    $('#createNpcClass').val('Cleric');
+    $('#createNpcLevel').val(8);
+    $('#createNpcMaxHp').val(200);
+    $('#createNpcAc').val(23);
+    $('#createNpcFortitude').val(19);
+    $('#createNpcReflex').val(17);
+    $('#createNpcWill').val(18);
+    $('#createEncounterName').val('Encounter #10');
+}
 
 setDummyData = function() {
     activeEncounterId = 4;
 
+    nextEncounterListId = 6;
     encounterList = {
         2 : {
             'name' : 'Dicks of Doom',
@@ -17,15 +37,21 @@ setDummyData = function() {
             'name' : 'Mirrored ceiling',
             'pcList' : [5,6],
             'npcList' : [9], 
-        }
+        },
+        5 : {
+            'name' : 'Peanuts and Dancing',
+            'pcList' : [5],
+            'npcList' : [8], 
+        },
     };
 
 
+    nextPcListId = 7;
     pcList = {
         5 : {
             'name'       : 'Umine',
-            'currentHP'  : 10,
-            'maxHP'      : 100,
+            'currentHp'  : 10,
+            'maxHp'      : 100,
             'initiative' : 13,
             'ac'         : 26,
             'fortitude'  : 18,
@@ -35,8 +61,8 @@ setDummyData = function() {
         },
         6 : {
             'name'       : 'Eldon',
-            'currentHP'  : 10,
-            'maxHP'      : 50,
+            'currentHp'  : 10,
+            'maxHp'      : 50,
             'initiative' : 18,
             'ac'         : 20,
             'fortitude'  : 18,
@@ -46,11 +72,12 @@ setDummyData = function() {
         },
     };
 
+    nextPcListId = 10;
     npcList = {
         7 : {
             'name'       : 'Baddy #1',
-            'currentHP'  : 100,
-            'maxHP'      : 100,
+            'currentHp'  : 100,
+            'maxHp'      : 100,
             'initiative' : 14,
             'ac'         : 26,
             'fortitude'  : 18,
@@ -60,8 +87,8 @@ setDummyData = function() {
         },
         8 : {
             'name'       : 'Baddy #2',
-            'currentHP'  : 50,
-            'maxHP'      : 50,
+            'currentHp'  : 50,
+            'maxHp'      : 50,
             'initiative' : 12,
             'ac'         : 20,
             'fortitude'  : 18,
@@ -71,8 +98,8 @@ setDummyData = function() {
         },
         9 : {
             'name'       : 'Baddy #3',
-            'currentHP'  : 50,
-            'maxHP'      : 50,
+            'currentHp'  : 50,
+            'maxHp'      : 50,
             'initiative' : 10,
             'ac'         : 20,
             'fortitude'  : 18,
