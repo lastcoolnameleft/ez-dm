@@ -1,17 +1,23 @@
-window.initApp = function () {
-    var dmToolModel    = new dmtool.model();
-    var dmToolUi       = new dmtool.ui( dmToolModel );
-    var dmToolDatafill = new dmtool.datafill( dmToolModel );
-
-    dmToolDatafill.setDummyData(dmToolModel);
-    dmToolDatafill.datafillCreateFields();
-
-    dmToolUi.refreshEncounterList();
-    dmToolUi.addPopupBindings();
-    dmToolUi.setEncounterName(dmToolModel.encounterList[dmToolModel.activeEncounterId]['name']);
-}
 
 window.dmtool = {};
+
+window.dmtool.app = function() {
+    var self = this;
+
+    self.dmToolModel    = new dmtool.model();
+    self.dmToolUi       = new dmtool.ui( self.dmToolModel );
+    self.dmToolDatafill = new dmtool.datafill( self.dmToolModel );
+
+    self.dmToolDatafill.setDummyData(self.dmToolModel);
+    self.dmToolDatafill.datafillCreateFields();
+
+    self.dmToolUi.refreshEncounterList();
+    self.dmToolUi.addPopupBindings();
+    self.dmToolUi.setEncounterName(self.dmToolModel.encounterList[self.dmToolModel.activeEncounterId]['name']);
+    self.dmToolUi.initializeAddCreature();
+
+    return self;
+}
 
 window.dmtool.model = function() {
     var self = this;
@@ -46,7 +52,6 @@ window.dmtool.model = function() {
         return creatureList;
     }
 
-
     self.createEncounter = function( name ) {
         var encounterInfo = { 'name' : name, 'pcList' : [], 'npcList' : [] };
         self.encounterList[ self.nextEncounterListId ] = encounterInfo;
@@ -65,7 +70,7 @@ window.dmtool.ui = function( dmToolModel ) {
         self.addCreaturesToEncounterList(activeCreatureList);
     }
 
-    self.addUser = function (name, currentHp, maxHp, initiative, ac, fortitude, reflex, will, imgUrl) {
+    self.addCreatureToEncounterList = function (name, currentHp, maxHp, initiative, ac, fortitude, reflex, will, imgUrl) {
         liString = '<li data-theme="c"><a href="#popupEditPcEncounter" data-rel="popup"><img src="' + imgUrl + '" /><h1>' + name + '</h1><p>HP:' + currentHp + '/' + maxHp + 'Init:' + initiative + '</p><span class="ui-li-count">AC: ' + ac + ' For: ' + fortitude + ' Ref: ' + reflex + ' Wil: ' + will + '</span></a><a href="#popupEditCreature" data-rel="popup"></a></li>';
         $( '#sortable' ).append(liString).listview("refresh");
     };
@@ -86,6 +91,9 @@ window.dmtool.ui = function( dmToolModel ) {
         $('#createPcButton').on('click', function () { self.submitCreatePc() });
         $('#createNpcButton').on('click', function () { self.submitCreateNpc() });
         $('#createEncounterButton').on('click', function () { self.submitCreateEncounter() });
+
+//  For asking initiative
+        $('#popupAdd').on('popupbeforeposition', function () { self.datafillPopup('#popupAddPc', 'popup', '#popupAddCreature', self.dmModel.pcList) });
     }
 
     self.datafillPopup = function(divId, dataRel, link, list) {
@@ -136,13 +144,27 @@ window.dmtool.ui = function( dmToolModel ) {
     self.addCreaturesToEncounterList = function(creatureList) { 
         sortedCreatureList = creatureList.sort(self.sortByInitiative);
         for ( var creatureId in sortedCreatureList ) {
-            self.addUser(creatureList[creatureId]['name'], creatureList[creatureId]['currentHp'], creatureList[creatureId]['maxHp'], creatureList[creatureId]['initiative'], creatureList[creatureId]['ac'], creatureList[creatureId]['fortitude'], creatureList[creatureId]['reflex'], creatureList[creatureId]['will'], creatureList[creatureId]['imgUrl']);
+            self.addCreatureToEncounterList(creatureList[creatureId]['name'], creatureList[creatureId]['currentHp'], creatureList[creatureId]['maxHp'], creatureList[creatureId]['initiative'], creatureList[creatureId]['ac'], creatureList[creatureId]['fortitude'], creatureList[creatureId]['reflex'], creatureList[creatureId]['will'], creatureList[creatureId]['imgUrl']);
         }
     }
 
     self.sortByInitiative = function(a, b) {
         return( b.initiative - a.initiative );
     }
+
+    self.initializeAddCreature = function() {
+        $(function(){
+            $('#select').scroller({
+                preset: 'select',
+                theme: 'default',
+                display: 'inline',
+                mode: 'scroller',
+                inputClass: 'i-txt'
+            });
+        });
+
+    }
+
     return self;
 }
 

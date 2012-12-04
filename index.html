@@ -13,6 +13,8 @@
             <script src="js/my.js"></script>
             <script src="js/dummyData.js"></script>
             <script src="jquery.ui.touch-punch.min.js"></script>
+    <link href="../mobiscroll/css/mobiscroll-2.2.custom.min.css" rel="stylesheet" type="text/css" />
+    <script src="../mobiscroll/js/mobiscroll-2.2.custom.min.js" type="text/javascript"></script>
     </head>
 <body>
     <!-- Home -->
@@ -193,6 +195,24 @@
                 </div>
             </form>
         </div>
+
+        <div data-role="popup" id="popupAddCreature" data-theme="a" class="ui-corner-all">
+            <div data-role="fieldcontain" class="demos fieldcontain" id="demo_select">
+                <select name="Initiative" id="select" style="display:none">
+                    <option value="1">1</option>
+                    <option value="2">2</option>
+                    <option value="3">3</option>
+                    <option value="4">4</option>
+                    <option value="5">5</option>
+                    <option value="6">6</option>
+                    <option value="7">7</option>
+                    <option value="8">8</option>
+                    <option value="9">9</option>
+                    <option value="10">10</option>
+                </select>
+                <input type="button" name="submit" value="Submit" data-theme="b" id='createNpcButton' />
+            </div>
+        </div>
   <!-- End Popup Data -->
 
   <!-- Start Header -->
@@ -208,7 +228,7 @@
         <ul data-role="listview" data-divider-theme="b" data-split-icon="gear" data-split-theme="d" data-inset="true" id="sortable">
             <li data-role="list-divider" role="heading">Divider</li>
         </ul>
-      </div>
+    </div>
   <!-- End content -->
 
   <!-- Start Footer -->
@@ -221,7 +241,7 @@
 </div>
     <script>
  $(document).ready(function() {
-    initApp()
+    window.dmApp = new dmtool.app();
  });
 
     </script>
