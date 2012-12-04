@@ -1,4 +1,3 @@
-
 window.dmtool.datafill = function(model) {
     var self = this;
     self.dmModel = model;

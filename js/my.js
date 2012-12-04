@@ -1,4 +1,4 @@
-initApp = function () {
+window.initApp = function () {
     var dmToolModel    = new dmtool.model();
     var dmToolUi       = new dmtool.ui( dmToolModel );
     var dmToolDatafill = new dmtool.datafill( dmToolModel );
