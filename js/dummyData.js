@@ -1,25 +1,23 @@
-window.dmtool.datafill = function(model) {
+window.dmtool.datafill = function(model, ui) {
     var self = this;
     self.dmModel = model;
+    self.ui = ui;
+
+    self.sampleCreatureData = {
+        'name' : 'Mr. Creature',
+        'class' : 'Fighter',
+        'level' : 8,
+        'maxHp' : 200,
+        'ac' : 23,
+        'fortitude' : 19,
+        'reflex' : 17,
+        'will' : 18,
+    }
 
     self.datafillCreateFields = function() {
-        $('#createPcName').val('PC #10');
-        $('#createPcClass').val('Fighter');
-        $('#createPcLevel').val(8);
-        $('#createPcMaxHp').val(200);
-        $('#createPcAc').val(23);
-        $('#createPcFortitude').val(19);
-        $('#createPcReflex').val(17);
-        $('#createPcWill').val(18);
-        $('#createNpcName').val('NPC #10');
-        $('#createNpcClass').val('Cleric');
-        $('#createNpcLevel').val(8);
-        $('#createNpcMaxHp').val(200);
-        $('#createNpcAc').val(23);
-        $('#createNpcFortitude').val(19);
-        $('#createNpcReflex').val(17);
-        $('#createNpcWill').val(18);
-        $('#createEncounterName').val('Encounter #10');
+        self.ui.datafillCreatureFields('createPc', self.sampleCreatureData);
+        self.ui.datafillCreatureFields('createNpc', self.sampleCreatureData);
+        $('#createEncounterName').val('Fearsome Encounter');
     }
 
     self.setDummyData = function(model) {
@@ -49,11 +47,12 @@ window.dmtool.datafill = function(model) {
             },
         };
 
-
         model.nextPcListId = 7;
         model.pcList = {
             5 : {
                 'name'       : 'Umine',
+                'class'      : 'Cleric',
+                'level'      : 8,
                 'currentHp'  : 10,
                 'maxHp'      : 100,
                 'initiative' : 13,
@@ -65,6 +64,8 @@ window.dmtool.datafill = function(model) {
             },
             6 : {
                 'name'       : 'Eldon',
+                'class'      : 'Warlock',
+                'level'      : 8,
                 'currentHp'  : 10,
                 'maxHp'      : 50,
                 'initiative' : 18,
