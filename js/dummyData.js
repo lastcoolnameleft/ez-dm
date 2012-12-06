@@ -49,7 +49,8 @@ window.dmtool.datafill = function(model, ui) {
 
         model.nextPcListId = 7;
         model.pcList = {
-            5 : {
+            0 : {
+                'id'         : 5,
                 'name'       : 'Umine',
                 'class'      : 'Cleric',
                 'level'      : 8,
@@ -62,7 +63,8 @@ window.dmtool.datafill = function(model, ui) {
                 'will'       : 14,
                 'imgUrl'     : 'img/fry.jpg'
             },
-            6 : {
+            1 : {
+                'id'         : 6,
                 'name'       : 'Eldon',
                 'class'      : 'Warlock',
                 'level'      : 8,
@@ -79,7 +81,8 @@ window.dmtool.datafill = function(model, ui) {
 
         model.nextPcListId = 10;
         model.npcList = {
-            7 : {
+            0 : {
+                'id'         : 7,
                 'name'       : 'Baddy #1',
                 'currentHp'  : 100,
                 'maxHp'      : 100,
@@ -90,7 +93,8 @@ window.dmtool.datafill = function(model, ui) {
                 'will'       : 14,
                 'imgUrl'     : 'img/hypnotoad.jpg'
             },
-            8 : {
+            1 : {
+                'id'         : 8
                 'name'       : 'Baddy #2',
                 'currentHp'  : 50,
                 'maxHp'      : 50,
@@ -101,7 +105,8 @@ window.dmtool.datafill = function(model, ui) {
                 'will'       : 19,
                 'imgUrl'     : 'img/nibbler.png'
             },
-            9 : {
+            2 : {
+                'id'         : 9,
                 'name'       : 'Baddy #3',
                 'currentHp'  : 50,
                 'maxHp'      : 50,

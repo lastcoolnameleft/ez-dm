@@ -30,18 +30,51 @@ window.dmtool.model = function() {
     self.nextPcListId = 0;
     self.npcList = {};
 
-    self.updatePc = function( pcId, pcData ) {
-        for ( key in pcData ) {
-            self.pcList[pcId][key] = pcData[key];
+    self.getCreatureDataFromId = function ( id, creatureList ) {
+        for ( key in creatureList ) {
+            if ( creatureList[key]['id'] == id ) {
+                return creatureList[key];
+            }
         }
+        return {};
     }
 
-    self.setActiveCreatureList = function(creatureList) {
-        activeCreatureList = creatureList;
+    self.getPcDataFromId = function( id ) {
+        return self.getCreatureDataFromId(id, this.getPcList());
+    }
+
+    self.getNpcDataFromId = function( id ) {
+        return self.getCreatureDataFromId(id, this.getNpcList());
+    }
+
+    self.getPcList = function() {
+        return this.pcList;
+    }
+
+    self.getNpcListList = function() {
+        return this.npcList;
     }
 
     self.getEncounterList = function() {
         return encounterList;
+    }
+
+    self.updateCreature = function( id, creatureData, creatureList ) {
+        for ( key in creatureData ) {
+            creatureList[pcId][key] = creatureData[key];
+        }
+    }
+
+    self.updatePc = function( pcId, pcData ) {
+        return self.updateCreature( pcId, pcData, this.getPcList() );
+    }
+
+    self.updateNpc = function( npcId, npcData ) {
+        return self.updateCreature( npcId, npcData, this.getNpcList() );
+    }
+
+    self.setActiveCreatureList = function(creatureList) {
+        this.activeCreatureList = creatureList;
     }
 
     self.getCreatureListFromEncounter = function(encounterId, encounterList, pcList, npcList) {
@@ -63,6 +96,7 @@ window.dmtool.model = function() {
         self.encounterList[ self.nextEncounterListId ] = encounterInfo;
         self.nextEncounterListId++;
     }
+
     return self;
 }
 
@@ -77,10 +111,14 @@ window.dmtool.ui = function( dmToolModel ) {
         self.addCreaturesToEncounterList(activeCreatureList);
     }
 
-    self.addCreatureToEncounterList = function (name, currentHp, maxHp, initiative, ac, fortitude, reflex, will, imgUrl) {
-        liString = '<li data-theme="c"><a href="#popupEditPcEncounter" data-rel="popup"><img src="' + imgUrl + '" /><h1>' + name + '</h1><p>HP:' + currentHp + '/' + maxHp + ' Init:' + initiative + '</p><span class="ui-li-count">AC: ' + ac + ' For: ' + fortitude + ' Ref: ' + reflex + ' Wil: ' + will + '</span></a><a href="#popupEditCreature" data-rel="popup" data-position-to="window"></a></li>';
+    self.addCreatureToEncounterList = function (id, creatureInfo) { 
+        var popupEditPcEncounterId = 'popupEditPcEncounter_' + id;
+        liString = '<li data-theme="c"><a href="#popupEditPcEncounter" data-rel="popup"><img src="' + creatureInfo['imgUrl'] + '" /><h1>' + creatureInfo['name'] + '</h1><p>HP:' + creatureInfo['currentHp'] + '/' + creatureInfo['maxHp'] + ' Init:' + creatureInfo['initiative'] + '</p><span class="ui-li-count">AC: ' + creatureInfo['ac'] + ' For: ' + creatureInfo['fortitude'] + ' Ref: ' + creatureInfo['reflex'] + ' Wil: ' + creatureInfo['will'] + '</span></a><a href="#popupEditCreature" data-rel="popup" data-position-to="window" id="' + popupEditPcEncounterId + '"></a></li>';
         $( '#encounterCreatureList' ).append(liString).listview("refresh");
-    };
+        $('#' + popupEditPcEncounterId).on('click', function() { 
+            self.initPopupEditCreature(id, creatureInfo); 
+        });
+    }
 
     self.setEncounterName = function(encounterName) {
         $( '#headerEncounterName' ).text( encounterName );
@@ -188,7 +226,7 @@ window.dmtool.ui = function( dmToolModel ) {
     self.addCreaturesToEncounterList = function(creatureList) { 
         sortedCreatureList = creatureList.sort(self.sortByInitiative);
         for ( var creatureId in sortedCreatureList ) {
-            self.addCreatureToEncounterList(creatureList[creatureId]['name'], creatureList[creatureId]['currentHp'], creatureList[creatureId]['maxHp'], creatureList[creatureId]['initiative'], creatureList[creatureId]['ac'], creatureList[creatureId]['fortitude'], creatureList[creatureId]['reflex'], creatureList[creatureId]['will'], creatureList[creatureId]['imgUrl']);
+            self.addCreatureToEncounterList(creatureId, creatureList[creatureId]);
         }
     }
 

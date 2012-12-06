@@ -99,34 +99,73 @@
         </div>
 
         <div data-role="popup" id="popupEditCreature" data-theme="a" class="ui-corner-all" style="padding:10px 20px;">
-            <form>
-              <h3>Stats:</h3>
-              <label for="name" class="ui-hidden-accessible">Name:</label>
-              <input type="text" name="name" id="popupEditCreature_name" value="" placeholder="Name" />
+            <div class="ui-grid-solo">
+                <h3>Stats:</h3>
+            </div>
 
-              <label for="class" class="ui-hidden-accessible">Class:</label>
-              <input type="text" name="class" id="popupEditCreature_class" value="" placeholder="Class" />
+            <div data-role="fieldcontain" >
+                <div class="ui-grid-a">
+                    <div class="ui-block-a"><label for="name" >Name:</label></div>
+                    <div class="ui-block-b"><input type="text" name="name" id="popupEditCreature_name" value="" placeholder="Name" /></div>
 
-              <label for="level" class="ui-hidden-accessible">Level:</label>
-              <input type="text" name="level" id="popupEditCreature_level" value="" placeholder="Level" />
+                    <div class="ui-block-a"><label for="class">Class:</label></div>
+                    <div class="ui-block-b"><input type="text" name="class" id="popupEditCreature_class" value="" placeholder="Class" /></div>
 
-              <label for="class" class="ui-hidden-accessible">Max HP:</label>
-              <input type="text" name="initiative" id="popupEditCreature_maxHp" value="" placeholder="Max HP" />
+                <div class="ui-block-a"><label for="level">Level:</label></div>
+                <div class="ui-block-b"><input type="text" name="level" id="popupEditCreature_level" value="" placeholder="Level" /></div>
 
-              <label for="class" class="ui-hidden-accessible">AC:</label>
-              <input type="text" name="ac" id="popupEditCreature_ac" value="" placeholder="AC" />
+                <div class="ui-block-a"><label for="class">Max HP:</label></div>
+                <div class="ui-block-b"><input type="text" name="initiative" id="popupEditCreature_maxHp" value="" placeholder="Max HP" /></div>
 
-              <label for="class" class="ui-hidden-accessible">Fortitude:</label>
-              <input type="text" name="fortitude" id="popupEditCreature_fortitude" value="" placeholder="Fortitude" />
+                <div class="ui-block-a"><label for="class">AC:</label></div>
+                <div class="ui-block-b"><input type="text" name="ac" id="popupEditCreature_ac" value="" placeholder="AC" /></div>
 
-              <label for="class" class="ui-hidden-accessible">Reflex:</label>
-              <input type="text" name="reflex" id="popupEditCreature_reflex" value="" placeholder="Reflex" />
+                <div class="ui-block-a"><label for="class">Fortitude:</label></div>
+                <div class="ui-block-b"><input type="text" name="fortitude" id="popupEditCreature_fortitude" value="" placeholder="Fortitude" /></div>
 
-              <label for="class" class="ui-hidden-accessible">Will:</label>
-              <input type="text" name="will" id="popupEditCreature_will" value="" placeholder="Will" />
+                <div class="ui-block-a"><label for="class">Reflex:</label></div>
+                <div class="ui-block-b"><input type="text" name="reflex" id="popupEditCreature_reflex" value="" placeholder="Reflex" /></div>
 
-              <input type="button" name="submit" value="submit" data-theme="b" id='editCreatureSubmitButton' />
-          </form>
+                <div class="ui-block-a"><label for="class">Will:</label></div>
+                <div class="ui-block-b"><input type="text" name="will" id="popupEditCreature_will" value="" placeholder="Will" /></div>
+                </div>
+            </div>
+
+            <div class="ui-grid-solo">
+                <input type="button" name="submit" value="submit" data-theme="b" id='editCreatureSubmitButton' />
+            </div>
+<!--
+            <div data-role="fieldcontain" class="ui-grid-a">
+                <form>
+                    <div class="ui-grid-solo"><h3>Stats:</h3></div>
+                    <div class="ui-block-a"><label for="name" >Name:</label></div>
+                    <div class="ui-block-b"><input type="text" name="name" id="popupEditCreature_name" value="" placeholder="Name" /></div>
+
+                    <div class="ui-block-a"><label for="class" class="ui-hidden-accessible">Class:</label></div>
+                    <div class="ui-block-b"><input type="text" name="class" id="popupEditCreature_class" value="" placeholder="Class" /></div>
+
+                    <div class="ui-block-a"><label for="level" class="ui-hidden-accessible">Level:</label></div>
+                    <div class="ui-block-b"><input type="text" name="level" id="popupEditCreature_level" value="" placeholder="Level" /></div>
+
+                    <div class="ui-block-a"><label for="class" class="ui-hidden-accessible">Max HP:</label></div>
+                    <div class="ui-block-b"><input type="text" name="initiative" id="popupEditCreature_maxHp" value="" placeholder="Max HP" /></div>
+
+                    <div class="ui-block-a"><label for="class" class="ui-hidden-accessible">AC:</label></div>
+                    <div class="ui-block-b"><input type="text" name="ac" id="popupEditCreature_ac" value="" placeholder="AC" /></div>
+
+                    <div class="ui-block-a"><label for="class" class="ui-hidden-accessible">Fortitude:</label></div>
+                    <div class="ui-block-b"><input type="text" name="fortitude" id="popupEditCreature_fortitude" value="" placeholder="Fortitude" /></div>
+
+                    <div class="ui-block-a"><label for="class" class="ui-hidden-accessible">Reflex:</label></div>
+                    <div class="ui-block-b"><input type="text" name="reflex" id="popupEditCreature_reflex" value="" placeholder="Reflex" /></div>
+
+                    <div class="ui-block-a"><label for="class" class="ui-hidden-accessible">Will:</label></div>
+                    <div class="ui-block-b"><input type="text" name="will" id="popupEditCreature_will" value="" placeholder="Will" /></div>
+
+                    <div class="ui-grid-solo"><input type="button" name="submit" value="submit" data-theme="b" id='editCreatureSubmitButton' /></div>
+                </form>
+            </div>
+-->
         </div>
 
         <div data-role="popup" id="popupEditPcEncounter" data-theme="a" class="ui-corner-all">
