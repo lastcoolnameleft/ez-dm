@@ -1,4 +1,4 @@
-window.dmtool.datafill = function(model, ui) {
+window.dmtool.datafill = function(controller, model, ui) {
     var self = this;
     self.dmModel = model;
     self.ui = ui;
@@ -21,36 +21,37 @@ window.dmtool.datafill = function(model, ui) {
     }
 
     self.setDummyData = function(model) {
-        model.activeEncounterId = 4;
+        model.activeEncounterId = 2;
 
-        model.nextEncounterListId = 6;
+        model.nextEncounterListId = 9;
         model.encounterList = {
-            2 : {
+            1 : {
+                'id' : 2,
                 'name' : 'Dicks of Doom',
-                'pcList' : [5,6],
-                'npcList' : [7], 
-            },
-            3 : {
-                'name' : 'Shadows over Miami',
-                'pcList' : [],
-                'npcList' : [8], 
+                'creatureList' : [5,6,7],
             },
             4 : {
-                'name' : 'Mirrored ceiling',
-                'pcList' : [5,6],
-                'npcList' : [9], 
+                'id' : 3,
+                'name' : 'Shadows over Miami',
+                'creatureList' : [8], 
             },
-            5 : {
+            6 : {
+                'id' : 5,
+                'name' : 'Mirrored ceiling',
+                'creatureList' : [5,6,9],
+            },
+            8 : {
+                'id' : 6,
                 'name' : 'Peanuts and Dancing',
-                'pcList' : [5],
-                'npcList' : [8], 
+                'creatureList' : [5, 8],
             },
         };
 
-        model.nextPcListId = 7;
-        model.pcList = {
-            0 : {
+        model.nextCreatureListId = 12;
+        model.creatureList = {
+            3 : {
                 'id'         : 5,
+                'type'       : 'pc',
                 'name'       : 'Umine',
                 'class'      : 'Cleric',
                 'level'      : 8,
@@ -63,8 +64,9 @@ window.dmtool.datafill = function(model, ui) {
                 'will'       : 14,
                 'imgUrl'     : 'img/fry.jpg'
             },
-            1 : {
+            5 : {
                 'id'         : 6,
+                'type'       : 'pc',
                 'name'       : 'Eldon',
                 'class'      : 'Warlock',
                 'level'      : 8,
@@ -77,12 +79,9 @@ window.dmtool.datafill = function(model, ui) {
                 'will'       : 19,
                 'imgUrl'     : 'img/bender.png'
             },
-        };
-
-        model.nextPcListId = 10;
-        model.npcList = {
-            0 : {
+            7 : {
                 'id'         : 7,
+                'type'       : 'npc',
                 'name'       : 'Baddy #1',
                 'currentHp'  : 100,
                 'maxHp'      : 100,
@@ -93,8 +92,9 @@ window.dmtool.datafill = function(model, ui) {
                 'will'       : 14,
                 'imgUrl'     : 'img/hypnotoad.jpg'
             },
-            1 : {
-                'id'         : 8
+            9 : {
+                'id'         : 8,
+                'type'       : 'npc',
                 'name'       : 'Baddy #2',
                 'currentHp'  : 50,
                 'maxHp'      : 50,
@@ -105,8 +105,9 @@ window.dmtool.datafill = function(model, ui) {
                 'will'       : 19,
                 'imgUrl'     : 'img/nibbler.png'
             },
-            2 : {
+            11 : {
                 'id'         : 9,
+                'type'       : 'npc',
                 'name'       : 'Baddy #3',
                 'currentHp'  : 50,
                 'maxHp'      : 50,
