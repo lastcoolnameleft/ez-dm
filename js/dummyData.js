@@ -1,11 +1,10 @@
-window.dmtool.datafill = function(controller, model, ui) {
+window.dmtool.datafill = function(model, ui) {
     var self = this;
     self.dmModel = model;
     self.ui = ui;
 
     self.sampleCreatureData = {
         'name' : 'Mr. Creature',
-        'class' : 'Fighter',
         'level' : 8,
         'maxHp' : 200,
         'ac' : 23,
@@ -15,8 +14,7 @@ window.dmtool.datafill = function(controller, model, ui) {
     }
 
     self.datafillCreateFields = function() {
-        self.ui.datafillCreatureFields('createPc', self.sampleCreatureData);
-        self.ui.datafillCreatureFields('createNpc', self.sampleCreatureData);
+        self.ui.datafillCreatureFields('createCreature', self.sampleCreatureData);
         $('#createEncounterName').val('Fearsome Encounter');
     }
 
@@ -53,7 +51,6 @@ window.dmtool.datafill = function(controller, model, ui) {
                 'id'         : 5,
                 'type'       : 'pc',
                 'name'       : 'Umine',
-                'class'      : 'Cleric',
                 'level'      : 8,
                 'currentHp'  : 10,
                 'maxHp'      : 100,
@@ -68,7 +65,6 @@ window.dmtool.datafill = function(controller, model, ui) {
                 'id'         : 6,
                 'type'       : 'pc',
                 'name'       : 'Eldon',
-                'class'      : 'Warlock',
                 'level'      : 8,
                 'currentHp'  : 10,
                 'maxHp'      : 50,
@@ -83,6 +79,7 @@ window.dmtool.datafill = function(controller, model, ui) {
                 'id'         : 7,
                 'type'       : 'npc',
                 'name'       : 'Baddy #1',
+                'level'      : 5,
                 'currentHp'  : 100,
                 'maxHp'      : 100,
                 'initiative' : 14,
@@ -96,6 +93,7 @@ window.dmtool.datafill = function(controller, model, ui) {
                 'id'         : 8,
                 'type'       : 'npc',
                 'name'       : 'Baddy #2',
+                'level'      : 5,
                 'currentHp'  : 50,
                 'maxHp'      : 50,
                 'initiative' : 12,
@@ -109,6 +107,7 @@ window.dmtool.datafill = function(controller, model, ui) {
                 'id'         : 9,
                 'type'       : 'npc',
                 'name'       : 'Baddy #3',
+                'level'      : 5,
                 'currentHp'  : 50,
                 'maxHp'      : 50,
                 'initiative' : 10,

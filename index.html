@@ -59,9 +59,9 @@
 
         <div data-role="popup" id="popupCreate">
             <ul data-role="listview" data-inset="true" style="min-width:210px;" data-theme="b">
-                <li><a href="#popupCreatePc" data-rel="popup" class="ui-btn-left" data-position-to="window">PC</a></li>
-                <li><a href="#popupCreateNpc" data-rel="popup" class="ui-btn-left" data-position-to="window">NPC</a></li>
-                <li><a href="#popupCreateEncounter" data-rel="popup" class="ui-btn-left" data-position-to="window">Encounter</a></li>
+                <li><a href="#popupCreateCreature" id='popupCreatePc' data-rel="popup" class="ui-btn-left" data-position-to="window">PC</a></li>
+                <li><a href="#popupCreateCreature" id='popupCreateNpc' data-rel="popup" class="ui-btn-left" data-position-to="window">NPC</a></li>
+                <li><a href="#popupCreateEncounter" id='popupCreateEncounter' data-rel="popup" class="ui-btn-left" data-position-to="window">Encounter</a></li>
             </ul>
         </div>
 
@@ -71,6 +71,9 @@
               <h3>Create New PC:</h3>
               <label for="name" class="ui-hidden-accessible">Name:</label>
               <input type="text" name="name" id="createCreature_name" value="" placeholder="Name" />
+
+              <label for="type" class="ui-hidden-accessible">Type:</label>
+              <input type="text" name="name" id="createCreature_type" value="" placeholder="Type" class="ui-hidden-accessible" />
 
               <label for="class" class="ui-hidden-accessible">Class:</label>
               <input type="text" name="class" id="createCreature_class" value="" placeholder="Class" />
@@ -107,9 +110,6 @@
                 <div class="ui-grid-a">
                     <div class="ui-block-a"><label for="name" >Name:</label></div>
                     <div class="ui-block-b"><input type="text" name="name" id="popupEditCreature_name" value="" placeholder="Name" /></div>
-
-                    <div class="ui-block-a"><label for="class">Class:</label></div>
-                    <div class="ui-block-b"><input type="text" name="class" id="popupEditCreature_class" value="" placeholder="Class" /></div>
 
                 <div class="ui-block-a"><label for="level">Level:</label></div>
                 <div class="ui-block-b"><input type="text" name="level" id="popupEditCreature_level" value="" placeholder="Level" /></div>
