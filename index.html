@@ -66,39 +66,38 @@
         </div>
 
         <div data-role="popup" id="popupCreateCreature" data-theme="a" class="ui-corner-all">
-          <form>
-            <div style="padding:10px 20px;">
-              <h3>Create New PC:</h3>
-              <label for="name" class="ui-hidden-accessible">Name:</label>
-              <input type="text" name="name" id="createCreature_name" value="" placeholder="Name" />
+            <div style="padding:10px 20px;" data-role="fieldcontain">
+            <form>
+                <h3>Create New Creature:</h3>
 
-              <label for="type" class="ui-hidden-accessible">Type:</label>
-              <input type="text" name="name" id="createCreature_type" value="" placeholder="Type" class="ui-hidden-accessible" />
+                <div class="ui-grid-a">
+                    <div class="ui-block-b"><input type="text" name="type" id="popupCreateCreature_type" value="" placeholder="Type" class="ui-hidden-accessible" /></div>
 
-              <label for="class" class="ui-hidden-accessible">Class:</label>
-              <input type="text" name="class" id="createCreature_class" value="" placeholder="Class" />
+                    <div class="ui-block-a"><label for="name" >Name:</label></div>
+                    <div class="ui-block-b"><input type="text" name="name" id="popupCreateCreature_name" value="" placeholder="Name" /></div>
 
-              <label for="level" class="ui-hidden-accessible">Level:</label>
-              <input type="text" name="level" id="createCreature_level" value="" placeholder="Level" />
 
-              <label for="class" class="ui-hidden-accessible">Max HP:</label>
-              <input type="text" name="initiative" id="createCreature_maxHp" value="" placeholder="Max HP" />
+                    <div class="ui-block-a"><label for="name" >Level:</label></div>
+                    <div class="ui-block-b"><input type="text" name="level" id="popupCreateCreature_level" value="" placeholder="Level" /></div>
 
-              <label for="class" class="ui-hidden-accessible">AC:</label>
-              <input type="text" name="ac" id="createCreature_ac" value="" placeholder="AC" />
+                    <div class="ui-block-a"><label for="name" >Max HP:</label></div>
+                    <div class="ui-block-b"><input type="text" name="maxHp" id="popupCreateCreature_maxHp" value="" placeholder="Max HP" /></div>
 
-              <label for="class" class="ui-hidden-accessible">Fortitude:</label>
-              <input type="text" name="fortitude" id="createCreature_fortitude" value="" placeholder="Fortitude" />
+                    <div class="ui-block-a"><label for="name" >AC:</label></div>
+                    <div class="ui-block-b"><input type="text" name="ac" id="popupCreateCreature_ac" value="" placeholder="AC" /></div>
 
-              <label for="class" class="ui-hidden-accessible">Reflex:</label>
-              <input type="text" name="reflex" id="createCreature_reflex" value="" placeholder="Reflex" />
+                    <div class="ui-block-a"><label for="name" >Fortitude:</label></div>
+                    <div class="ui-block-b"><input type="text" name="fortitude" id="popupCreateCreature_fortitude" value="" placeholder="Fortitude" /></div>
 
-              <label for="class" class="ui-hidden-accessible">Will:</label>
-              <input type="text" name="will" id="createCreature_will" value="" placeholder="Will" />
+                    <div class="ui-block-a"><label for="name" >Reflex:</label></div>
+                    <div class="ui-block-b"><input type="text" name="reflex" id="popupCreateCreature_reflex" value="" placeholder="Reflex" /></div>
 
-              <input type="button" name="submit" value="submit" data-theme="b" id='createCreatureButton' />
-            </div>
-          </form>
+                    <div class="ui-block-a"><label for="name" >Will:</label></div>
+                    <div class="ui-block-b"><input type="text" name="will" id="popupCreateCreature_will" value="" placeholder="Will" /></div>
+                </div>
+                <input type="button" name="submit" value="submit" data-theme="b" id='createCreatureSubmitButton' />
+                </div>
+            </form>
         </div>
 
         <div data-role="popup" id="popupEditCreature" data-theme="a" class="ui-corner-all" style="padding:10px 20px;">
@@ -111,23 +110,23 @@
                     <div class="ui-block-a"><label for="name" >Name:</label></div>
                     <div class="ui-block-b"><input type="text" name="name" id="popupEditCreature_name" value="" placeholder="Name" /></div>
 
-                <div class="ui-block-a"><label for="level">Level:</label></div>
-                <div class="ui-block-b"><input type="text" name="level" id="popupEditCreature_level" value="" placeholder="Level" /></div>
+                    <div class="ui-block-a"><label for="level">Level:</label></div>
+                    <div class="ui-block-b"><input type="text" name="level" id="popupEditCreature_level" value="" placeholder="Level" /></div>
 
-                <div class="ui-block-a"><label for="class">Max HP:</label></div>
-                <div class="ui-block-b"><input type="text" name="initiative" id="popupEditCreature_maxHp" value="" placeholder="Max HP" /></div>
+                    <div class="ui-block-a"><label for="class">Max HP:</label></div>
+                    <div class="ui-block-b"><input type="text" name="initiative" id="popupEditCreature_maxHp" value="" placeholder="Max HP" /></div>
 
-                <div class="ui-block-a"><label for="class">AC:</label></div>
-                <div class="ui-block-b"><input type="text" name="ac" id="popupEditCreature_ac" value="" placeholder="AC" /></div>
+                    <div class="ui-block-a"><label for="class">AC:</label></div>
+                    <div class="ui-block-b"><input type="text" name="ac" id="popupEditCreature_ac" value="" placeholder="AC" /></div>
 
-                <div class="ui-block-a"><label for="class">Fortitude:</label></div>
-                <div class="ui-block-b"><input type="text" name="fortitude" id="popupEditCreature_fortitude" value="" placeholder="Fortitude" /></div>
+                    <div class="ui-block-a"><label for="class">Fortitude:</label></div>
+                    <div class="ui-block-b"><input type="text" name="fortitude" id="popupEditCreature_fortitude" value="" placeholder="Fortitude" /></div>
 
-                <div class="ui-block-a"><label for="class">Reflex:</label></div>
-                <div class="ui-block-b"><input type="text" name="reflex" id="popupEditCreature_reflex" value="" placeholder="Reflex" /></div>
+                    <div class="ui-block-a"><label for="class">Reflex:</label></div>
+                    <div class="ui-block-b"><input type="text" name="reflex" id="popupEditCreature_reflex" value="" placeholder="Reflex" /></div>
 
-                <div class="ui-block-a"><label for="class">Will:</label></div>
-                <div class="ui-block-b"><input type="text" name="will" id="popupEditCreature_will" value="" placeholder="Will" /></div>
+                    <div class="ui-block-a"><label for="class">Will:</label></div>
+                    <div class="ui-block-b"><input type="text" name="will" id="popupEditCreature_will" value="" placeholder="Will" /></div>
                 </div>
             </div>
 
@@ -172,8 +171,8 @@
 
         <div data-role="popup" id="popupAddCreature" data-theme="a" class="ui-corner-all">
             <div data-role="fieldcontain" class="demos fieldcontain" id="demo_select">
-
-                <input type="button" name="submit" value="Auto-Roll" data-theme="b" id='popupAddCreatureRollInitiative' />
+                <input type='hidden' id='popupAddCreatureInitiative_CreatureId'>
+                <!--input type="button" name="submit" value="Auto-Roll" data-theme="b" id='popupAddCreatureRollInitiative' /-->
                 <select name="Initiative" id="popupAddCreatureInitiative" style="display:none" data-role='none'>
                     <option value="1">1</option>
                     <option value="2">2</option>
@@ -186,7 +185,7 @@
                     <option value="9">9</option>
                     <option value="10">10</option>
                 </select>
-                <input type="button" name="submit" value="Submit" data-theme="b" id='popupAddCreatureSetInitiative' />
+                <input type="button" name="submit" value="Submit" data-theme="b" id='popupAddCreatureInitiativeSubmit' />
             </div>
         </div>
   <!-- End Popup Data -->

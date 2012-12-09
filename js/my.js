@@ -32,6 +32,24 @@ window.dmtool.model = function () {
     self.nextCreatureListId = 0;
     self.creatureList = {};
 
+    self.addCreatureToEncounter = function ( creatureId, encounterId ) {
+        self.getEncounterDataFromEncounterId(encounterId)['creatureList'].push( creatureId );
+    }
+
+    self.addCreatureToActiveEncounter = function ( creatureId ) {
+        self.addCreatureToEncounter( creatureId, self.getActiveEncounterId() );
+    }
+
+    self.getEncounterDataFromId = function ( id ) {
+        var encounterList = self.getEncounterList();
+        for ( key in encounterList) {
+            if ( encounterList[key]['id'] == id ) {
+                return encounterList[key];
+            }
+        }
+        return;
+    }
+
     self.getCreatureDataFromId = function ( id ) {
         for ( key in self.creatureList ) {
             if ( self.creatureList[key]['id'] == id ) {
@@ -41,12 +59,28 @@ window.dmtool.model = function () {
         return;
     }
 
-    self.getCreatureTypeFromList = function( type ) {
-        result = [];
-        for (key in self.creatureList ) {
-            if ( self.creatureList[key]['type'] == type ) {
-               result.push(self.creatureList[key]);
-            }
+    
+    self.getActiveEncounterData = function () {
+        return self.getEncounterDataFromId(self.getActiveEncounterId());
+    }
+
+    self.getNonactivePcList = function () {
+        return self.getNonActiveListFromCreatureList( self.getPcList() );
+    }
+
+    self.getNonactiveNpcList = function () {
+        return self.getNonActiveListFromCreatureList( self.getNpcList() );
+    }
+
+    self.getNonActiveListFromCreatureList = function ( creatureList ) {
+        var result = [];
+        for ( index in creatureList ) {
+            var creatureId = creatureList[index]['id'];
+            var activeCreatureList = self.getActiveEncounterData()['creatureList'];
+            var found = $.inArray(creatureId, activeCreatureList);
+            if (found == -1 ) {
+                result.push(self.getCreatureDataFromId( creatureId ) );
+            } 
         }
         return result;
     }
@@ -59,8 +93,22 @@ window.dmtool.model = function () {
         return self.getCreatureTypeFromList( 'npc' );
     }
 
+    self.getCreatureTypeFromList = function( type ) {
+        var result = [];
+        for (key in self.creatureList ) {
+            if ( self.creatureList[key]['type'] == type ) {
+               result.push(self.creatureList[key]);
+            }
+        }
+        return result;
+    }
+
     self.getEncounterList = function () {
         return self.encounterList;
+    }
+
+    self.getActiveEncounterId = function () {
+        return self.activeEncounterId;
     }
 
     self.updateCreature = function ( id, creatureData ) {
@@ -118,7 +166,7 @@ window.dmtool.ui = function( dmToolModel ) {
         $( '#encounterCreatureList' ).empty();
     }
 
-    self.addCreatureToEncounterList = function (id, creatureInfo) { 
+    self.addCreatureTextToEncounterList = function (id, creatureInfo) { 
         var popupEditPcEncounterId = 'popupEditPcEncounter_' + id;
         liString = '<li data-theme="c"><a href="#popupEditPcEncounter" data-rel="popup"><img src="' + creatureInfo['imgUrl'] + '" /><h1>' + creatureInfo['name'] + '</h1><p>HP:' + creatureInfo['currentHp'] + '/' + creatureInfo['maxHp'] + ' Init:' + creatureInfo['initiative'] + '</p><span class="ui-li-count">AC: ' + creatureInfo['ac'] + ' For: ' + creatureInfo['fortitude'] + ' Ref: ' + creatureInfo['reflex'] + ' Wil: ' + creatureInfo['will'] + '</span></a><a href="#popupEditCreature" data-rel="popup" data-position-to="window" id="' + popupEditPcEncounterId + '"></a></li>';
         $( '#encounterCreatureList' ).append(liString).listview("refresh");
@@ -135,28 +183,52 @@ window.dmtool.ui = function( dmToolModel ) {
         $('#popupEdit').on('popupbeforeposition', function () { self.datafillEditCreatureListPopup('popupEditPc', 'popup', 'popupEditCreature', self.dmModel.getPcList()) });
         $('#popupEdit').on('popupbeforeposition', function () { self.datafillEditCreatureListPopup('popupEditNpc', 'popup', 'popupEditCreature', self.dmModel.getNpcList() ) });
         $('#popupEdit').on('popupbeforeposition', function () { self.datafillPopup('#popupEditEncounter', 'popup', '#popupEditEncounter', self.dmModel.getEncounterList() ) });
-        $('#popupAdd').on('popupbeforeposition', function () { self.datafillPopup('#popupAddPc', 'dialog', 'addCreature.html', self.dmModel.getPcList() ) });
-        $('#popupAdd').on('popupbeforeposition', function () { self.datafillPopup('#popupAddNpc', 'dialog', 'addCreature.html', self.dmModel.getNpcList() ) });
         $('#popupAdd').on('popupbeforeposition', function () { self.datafillPopup('#popupAddEncounter', 'dialog', '#popupAddEncounter', self.dmModel.getEncounterList() ) });
+        $('#popupAddCreatureInitiativeSubmit').on('click', function () { self.submitAddCreatureToEncounter() });
 
         $('#popupCreatePc').on('click', function () { self.clickCreatePc() });
         $('#popupCreateNpc').on('click', function () { self.clickCreateNpc() });
 
-        $('#createCreatureButton').on('click', function () { self.submitCreateCreature() });
+        $('#createCreatureSubmitButton').on('click', function () { self.submitCreateCreature() });
         $('#createEncounterButton').on('click', function () { self.submitCreateEncounter() });
 
 //  For asking initiative
-        $('#popupAdd').on('popupbeforeposition', function () { self.datafillPopup('#popupAddPc', 'popup', '#popupAddCreature', self.dmModel.getPcList() ) });
+        $('#popupAdd').on('popupbeforeposition', function () { self.datafillAddCreatureListPopup('popupAddPc', 'popup', 'popupAddCreature', self.dmModel.getNonactivePcList() ) });
+        $('#popupAdd').on('popupbeforeposition', function () { self.datafillAddCreatureListPopup('popupAddNpc', 'popup', 'popupAddCreature', self.dmModel.getNonactiveNpcList() ) });
+    }
+
+    self.submitAddCreatureToEncounter = function() {
+        var initiative = $( '#popupAddCreatureInitiative' ).val();
+        var creatureId = $( '#popupAddCreatureInitiative_CreatureId' ).val();
+        var creatureData = self.dmModel.getCreatureDataFromId(creatureId);
+        creatureData['initiative'] = initiative;
+        self.dmModel.addCreatureToActiveEncounter(creatureId);
+        $( "#popupAddCreature" ).popup( "close" );
+        self.refreshEncounterList();
     }
 
     self.clickCreatePc = function () {
-        var encounterName = $( '#createCreature_type' ).val('pc');
+        var encounterName = $( '#popupCreateCreature_type' ).val('pc');
     }
 
     self.clickCreateNpc = function () {
-        var encounterName = $( '#createCreature_type' ).val('npc');
+        var encounterName = $( '#popupCreateCreature_type' ).val('npc');
     }
 
+    //  Init Edit Creature Popup
+    self.initPopupAddCreature = function( id, creatureData ) {
+       self.datafillCreatureFields('popupAdCreature', creatureData); 
+        $( '#popupAddCreatureInitiative_CreatureId' ).val(creatureData['id']);
+        $('#addCreatureSubmitButton').off('click');
+        $('#addCreatureSubmitButton').on('click', function() { 
+            $( "#popupAddCreature" ).popup( "close" );
+            submitCreatureData = self.fetchCreatureDataFromFields('popupAddCreature');
+            self.dmModel.addCreature( id, submitCreatureData );
+            self.refreshEncounterList();
+        });
+    }
+
+    //  Init Edit Creature Popup
     self.initPopupEditCreature = function( id, creatureData ) {
        self.datafillCreatureFields('popupEditCreature', creatureData); 
         $('#editCreatureSubmitButton').off('click');
@@ -176,6 +248,17 @@ window.dmtool.ui = function( dmToolModel ) {
         }
     }
 
+    self.datafillAddCreatureListPopup = function(divId, dataRel, link, list) {
+        $('#' + divId + ' ul').html('');
+        for ( var id in list) {
+            var domId = link + '_' + divId + '_' + id; 
+            var name = list[id]['name'];
+            var li = '<li><a href="#' + link + '" id="' + domId + '" data-position-to="window" class="ui-btn-left" data-rel="' + dataRel + '">' + name + '</a></li>';
+            $('#' + divId + ' ul').append(li).listview('refresh');
+            $('#' + domId).on('click', self.datafillAddCreatureFormPopup(list[id]['id']));
+        }
+    }
+
     self.datafillEditCreatureListPopup = function(divId, dataRel, link, list) {
         $('#' + divId + ' ul').html('');
         for ( var id in list) {
@@ -187,12 +270,20 @@ window.dmtool.ui = function( dmToolModel ) {
         }
     }
 
+    self.datafillAddCreatureFormPopup = function(id) { 
+        return function() {
+            var creatureData = self.dmModel.getCreatureDataFromId(id);
+            self.initPopupAddCreature(id, creatureData); 
+        }
+    }
+
     self.datafillEditCreatureFormPopup = function(id) { 
         return function() {
             var creatureData = self.dmModel.getCreatureDataFromId(id);
             self.initPopupEditCreature(id, creatureData); 
         }
     }
+
     self.datafillCreatureFields = function(prefix, list) {
         for ( id in list ) {
             $('#' + prefix + '_' + id).val( list[ id ] );
@@ -200,7 +291,7 @@ window.dmtool.ui = function( dmToolModel ) {
     }
 
     self.fetchCreatureDataFromFields = function( prefix ) {
-        var fieldList = ['name', 'maxHp', 'ac', 'fortitude', 'reflex', 'will'];
+        var fieldList = ['name', 'maxHp', 'ac', 'fortitude', 'reflex', 'will', 'level'];
         var creatureData = {};
         for ( id in fieldList )  {
             creatureData[fieldList[id]] = $( '#' + prefix + '_' + fieldList[id] ).val();
@@ -211,20 +302,13 @@ window.dmtool.ui = function( dmToolModel ) {
     self.submitCreateCreature = function() {
         //  Probably shouldn't close both.  
         $( "#popupCreateCreature" ).popup( "close" );
-        var newCreatureInfo = { 
-            'id'         : self.dmModel.nextCreatureListId,
-            'type'       : $( '#createCreature_type' ).val(),
-            'name'       : $( '#createCreature_name' ).val(), 
-            'maxHp'      : $( '#createCreature_maxHp' ).val(), 
-            'initiative' : 0, 
-            'ac'         : $( '#createCreature_ac' ).val(), 
-            'fortitude'  : $( '#createCreature_fortitude' ).val(),
-            'reflex'     : $( '#createCreature_reflex' ).val(), 
-            'will'       : $( '#createCreature_will' ).val(), 
-            'imgUrl'     : 'img/nibbler.jpg'
-        };
+        createCreatureData = self.fetchCreatureDataFromFields('popupCreateCreature');
+        createCreatureData['id'] = self.dmModel.nextCreatureListId;
+        createCreatureData['initiative'] = 0;
+        createCreatureData['imgUrl'] = 'img/nibbler.jpg';
+        createCreatureData['type'] = $('#popupCreateCreature_type').val();
 
-        self.dmModel.creatureList[ self.dmModel.nextCreatureListId ] = newCreatureInfo;
+        self.dmModel.creatureList[ self.dmModel.nextCreatureListId ] = createCreatureData;
         self.dmModel.nextCreatureListId++;
     }
 
@@ -249,7 +333,7 @@ window.dmtool.ui = function( dmToolModel ) {
         activeCreatureList = dmToolModel.getCreatureListFromEncounter(self.dmModel.activeEncounterId);
         sortedCreatureList = activeCreatureList.sort(self.sortByInitiative);
         for ( var creatureId in sortedCreatureList ) {
-            self.addCreatureToEncounterList(creatureId, sortedCreatureList[creatureId]);
+            self.addCreatureTextToEncounterList(creatureId, sortedCreatureList[creatureId]);
         }
     }
 

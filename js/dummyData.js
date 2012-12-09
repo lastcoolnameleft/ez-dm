@@ -14,7 +14,7 @@ window.dmtool.datafill = function(model, ui) {
     }
 
     self.datafillCreateFields = function() {
-        self.ui.datafillCreatureFields('createCreature', self.sampleCreatureData);
+        self.ui.datafillCreatureFields('popupCreateCreature', self.sampleCreatureData);
         $('#createEncounterName').val('Fearsome Encounter');
     }
 
