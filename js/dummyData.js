@@ -101,7 +101,7 @@ window.dmtool.datafill = function(model, ui) {
                 'fortitude'  : 18,
                 'reflex'     : 19,
                 'will'       : 19,
-                'imgUrl'     : 'img/nibbler.png'
+                'imgUrl'     : 'img/nibbler.jpg'
             },
             11 : {
                 'id'         : 9,
