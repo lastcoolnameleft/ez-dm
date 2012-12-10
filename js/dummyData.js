@@ -14,12 +14,12 @@ window.dmtool.datafill = function(model, ui) {
     }
 
     self.datafillCreateFields = function() {
-        self.ui.datafillCreatureFields('popupCreateCreature', self.sampleCreatureData);
+        self.ui.datafillCreatureFields('createCreature_popup', self.sampleCreatureData);
         $('#createEncounterName').val('Fearsome Encounter');
     }
 
     self.setDummyData = function(model) {
-        model.activeEncounterId = 2;
+        model.activeEncounterId = 3;
 
         model.nextEncounterListId = 9;
         model.encounterList = {

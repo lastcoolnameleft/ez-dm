@@ -38,63 +38,63 @@
             </div>
         </div>
 
-        <div data-role="popup" id="popupAdd">
+        <div data-role="popup" id="add_popup">
             <div data-role="collapsible-set" data-theme="b" data-content-theme="c" data-collapsed-icon="arrow-r"
                 data-expanded-icon="arrow-d" style="margin:0; width:250px;">
-                <div data-role="collapsible" data-inset="false" id='popupAddPc'>
+                <div data-role="collapsible" data-inset="false" id='addPc_listItemDiv'>
                     <h2>Add PC</h2>
                     <ul data-role="listview"></ul>
                 </div>
-                <div data-role="collapsible" data-inset="false" id='popupAddNpc'>
+                <div data-role="collapsible" data-inset="false" id='addNpc_listItemDiv'>
                     <h2>Add NPC</h2>
                     <ul data-role="listview"></ul>
                 </div>
-                <div data-role="collapsible" data-inset="false" id='popupAddEncounter'>
+                <div data-role="collapsible" data-inset="false" id='addEncounter_listItemDiv'>
                     <h2>Add Encounter</h2>
                     <ul data-role="listview"></ul>
                 </div>
             </div>
         </div>
 
-        <div data-role="popup" id="popupCreate">
+        <div data-role="popup" id="create_popup">
             <ul data-role="listview" data-inset="true" style="min-width:210px;" data-theme="b">
-                <li><a href="#popupCreateCreature" id='popupCreatePc' data-rel="popup" class="ui-btn-left" data-position-to="window">PC</a></li>
-                <li><a href="#popupCreateCreature" id='popupCreateNpc' data-rel="popup" class="ui-btn-left" data-position-to="window">NPC</a></li>
-                <li><a href="#popupCreateEncounter" id='popupCreateEncounter' data-rel="popup" class="ui-btn-left" data-position-to="window">Encounter</a></li>
+                <li><a href="#" id='createPc_listItem' data-rel="popup" class="ui-btn-left" data-position-to="window">PC</a></li>
+                <li><a href="#" id='createNpc_listItem' data-rel="popup" class="ui-btn-left" data-position-to="window">NPC</a></li>
+                <li><a href="#" id='createEncounter_listItem' data-rel="popup" class="ui-btn-left" data-position-to="window">Encounter</a></li>
             </ul>
         </div>
 
-        <div data-role="popup" id="popupCreateCreature" data-theme="a" class="ui-corner-all">
+        <div data-role="popup" id="createCreature_popup" data-theme="a" class="ui-corner-all">
             <div style="padding:10px 20px;" data-role="fieldcontain">
             <form>
                 <h3>Create New Creature:</h3>
 
                 <div class="ui-grid-a">
-                    <div class="ui-block-b"><input type="text" name="type" id="popupCreateCreature_type" value="" placeholder="Type" class="ui-hidden-accessible" /></div>
+                    <div class="ui-block-b"><input type="text" name="type" id="createCreature_popup_type" value="" placeholder="Type" class="ui-hidden-accessible" /></div>
 
                     <div class="ui-block-a"><label for="name" >Name:</label></div>
-                    <div class="ui-block-b"><input type="text" name="name" id="popupCreateCreature_name" value="" placeholder="Name" /></div>
+                    <div class="ui-block-b"><input type="text" name="name" id="createCreature_popup_name" value="" placeholder="Name" /></div>
 
 
                     <div class="ui-block-a"><label for="name" >Level:</label></div>
-                    <div class="ui-block-b"><input type="text" name="level" id="popupCreateCreature_level" value="" placeholder="Level" /></div>
+                    <div class="ui-block-b"><input type="text" name="level" id="createCreature_popup_level" value="" placeholder="Level" /></div>
 
                     <div class="ui-block-a"><label for="name" >Max HP:</label></div>
-                    <div class="ui-block-b"><input type="text" name="maxHp" id="popupCreateCreature_maxHp" value="" placeholder="Max HP" /></div>
+                    <div class="ui-block-b"><input type="text" name="maxHp" id="createCreature_popup_maxHp" value="" placeholder="Max HP" /></div>
 
                     <div class="ui-block-a"><label for="name" >AC:</label></div>
-                    <div class="ui-block-b"><input type="text" name="ac" id="popupCreateCreature_ac" value="" placeholder="AC" /></div>
+                    <div class="ui-block-b"><input type="text" name="ac" id="createCreature_popup_ac" value="" placeholder="AC" /></div>
 
                     <div class="ui-block-a"><label for="name" >Fortitude:</label></div>
-                    <div class="ui-block-b"><input type="text" name="fortitude" id="popupCreateCreature_fortitude" value="" placeholder="Fortitude" /></div>
+                    <div class="ui-block-b"><input type="text" name="fortitude" id="createCreature_popup_fortitude" value="" placeholder="Fortitude" /></div>
 
                     <div class="ui-block-a"><label for="name" >Reflex:</label></div>
-                    <div class="ui-block-b"><input type="text" name="reflex" id="popupCreateCreature_reflex" value="" placeholder="Reflex" /></div>
+                    <div class="ui-block-b"><input type="text" name="reflex" id="createCreature_popup_reflex" value="" placeholder="Reflex" /></div>
 
                     <div class="ui-block-a"><label for="name" >Will:</label></div>
-                    <div class="ui-block-b"><input type="text" name="will" id="popupCreateCreature_will" value="" placeholder="Will" /></div>
+                    <div class="ui-block-b"><input type="text" name="will" id="createCreature_popup_will" value="" placeholder="Will" /></div>
                 </div>
-                <input type="button" name="submit" value="submit" data-theme="b" id='createCreatureSubmitButton' />
+                <input type="button" name="submit" value="submit" data-theme="b" id='createCreature_button_submit' />
                 </div>
             </form>
         </div>
@@ -157,22 +157,22 @@
             </form>
         </div>
 
-        <div data-role="popup" id="popupCreateEncounter" data-theme="a" class="ui-corner-all">
+        <div data-role="popup" id="createEncounter_popup" data-theme="a" class="ui-corner-all">
             <form>
                 <div style="padding:10px 20px;">
                     <h3>Create New Encounter:</h3>
                     <label for="name" class="ui-hidden-accessible">Name:</label>
                     <input type='text' name='name' id='createEncounterName' value='' placeholer='name' />
-                    <input type='button' name='submit' value='submit' id='createEncounterButton' data-theme='b' />
+                    <input type='button' name='submit' value='submit' id='createEncounter_button_submit' data-theme='b' />
                 </div>
             </form>
         </div>
 
-        <div data-role="popup" id="popupAddCreature" data-theme="a" class="ui-corner-all">
+        <div data-role="popup" id="addCreature_popup" data-theme="a" class="ui-corner-all">
             <div data-role="fieldcontain" class="demos fieldcontain" id="demo_select">
-                <input type='hidden' id='popupAddCreatureInitiative_CreatureId'>
+                <input type='hidden' id='addCreature_popup_creatureId'>
                 <!--input type="button" name="submit" value="Auto-Roll" data-theme="b" id='popupAddCreatureRollInitiative' /-->
-                <select name="Initiative" id="popupAddCreatureInitiative" style="display:none" data-role='none'>
+                <select name="Initiative" id="addCreature_popup_initiative" style="display:none" data-role='none'>
                     <option value="1">1</option>
                     <option value="2">2</option>
                     <option value="3">3</option>
@@ -184,16 +184,16 @@
                     <option value="9">9</option>
                     <option value="10">10</option>
                 </select>
-                <input type="button" name="submit" value="Submit" data-theme="b" id='popupAddCreatureInitiativeSubmit' />
+                <input type="button" name="submit" value="Submit" data-theme="b" id='addCreature_popup_submit' />
             </div>
         </div>
   <!-- End Popup Data -->
 
   <!-- Start Header -->
       <div data-theme="a" data-role="header">
-        <a data-role="button" href="#popupAdd" data-rel="popup" class="ui-btn-left" id="addCreatureButton" data-position-to="origin">Add</a>
+        <a data-role="button" href="#" id='add_button' data-rel="popup" class="ui-btn-left" data-position-to="origin">Add</a>
         <h3 id='headerEncounterName'>Encounter</h3>
-        <a data-role="button" href="#popupEdit" data-rel="popup" class="ui-btn-right" data-position-to='origin'>Edit</a>
+        <a data-role="button" href="#" id='edit_button' data-rel="popup" class="ui-btn-right" data-position-to='origin'>Edit</a>
       </div>
   <!-- End Header -->
 
@@ -206,7 +206,7 @@
 
   <!-- Start Footer -->
       <div data-theme="a" data-role="footer" data-position="fixed">
-        <a data-role="button" href="#popupCreate" data-rel="popup" class="ui-btn-left" id='createButton' data-position-to="origin">Create</a>
+        <a data-role="button" href="#" data-rel="popup" class="ui-btn-left" id='create_button' data-position-to="origin">Create</a>
         <h3>Footer</h3>
       </div>
   <!-- Start Footer -->

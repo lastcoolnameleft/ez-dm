@@ -122,7 +122,7 @@ window.dmtool.model = function () {
         self.activeCreatureList = creatureList;
     }
 
-    self.getCreatureListFromEncounter = function (encounterId) {
+    self.getCreatureListFromEncounterId = function (encounterId) {
         var creatureList = [];
     
         encounterData = self.getEncounterDataFromEncounterId( encounterId ); 
@@ -144,7 +144,7 @@ window.dmtool.model = function () {
 
     self.createEncounter = function ( name ) {
         var encounterInfo = { 'id' : self.nextEncounterListId, 'name' : name, 'creatureList' : [] };
-        self.encounterList.push( encounterInfo );
+        self.encounterList[self.nextEncounterListId] = encounterInfo ;
         self.nextEncounterListId++;
     }
 
@@ -157,7 +157,7 @@ window.dmtool.ui = function( dmToolModel ) {
     self.dmModel = dmToolModel;
 
     self.submitCreateEncounter = function() {
-        $( "#popupCreateEncounter" ).popup( "close" );
+        $( "#createEncounter_popup" ).popup( "close" );
         var encounterName = $( '#createEncounterName' ).val();
         self.dmModel.createEncounter(encounterName);     
     }
@@ -168,7 +168,12 @@ window.dmtool.ui = function( dmToolModel ) {
 
     self.addCreatureTextToEncounterList = function (id, creatureInfo) { 
         var popupEditPcEncounterId = 'popupEditPcEncounter_' + id;
-        liString = '<li data-theme="c"><a href="#popupEditPcEncounter" data-rel="popup"><img src="' + creatureInfo['imgUrl'] + '" /><h1>' + creatureInfo['name'] + '</h1><p>HP:' + creatureInfo['currentHp'] + '/' + creatureInfo['maxHp'] + ' Init:' + creatureInfo['initiative'] + '</p><span class="ui-li-count">AC: ' + creatureInfo['ac'] + ' For: ' + creatureInfo['fortitude'] + ' Ref: ' + creatureInfo['reflex'] + ' Wil: ' + creatureInfo['will'] + '</span></a><a href="#popupEditCreature" data-rel="popup" data-position-to="window" id="' + popupEditPcEncounterId + '"></a></li>';
+        var liCount = '<span class="ui-li-count">AC: ' + creatureInfo['ac'] + ' For: ' + creatureInfo['fortitude'] + ' Ref: ' + creatureInfo['reflex'] + ' Wil: ' + creatureInfo['will'] + '</span>';
+        var liRightLink = '<a href="#popupEditCreature" data-rel="popup" data-position-to="window" id="' + popupEditPcEncounterId + '"></a>';
+        var liLeftLink = '<a href="#popupEditPcEncounter" data-rel="popup"><img src="' + creatureInfo['imgUrl'] + '" /><h1>' + creatureInfo['name'] + '</h1><p>HP:' + creatureInfo['currentHp'] + '/' + creatureInfo['maxHp'] + ' Init:' + creatureInfo['initiative'] + '</p>' + liCount + '</a>';
+
+        var liString = '<li data-theme="c">' + liLeftLink + liRightLink + '</li>';
+
         $( '#encounterCreatureList' ).append(liString).listview("refresh");
         $('#' + popupEditPcEncounterId).on('click', self.datafillEditCreatureFormPopup(creatureInfo['id']));
     }
@@ -183,47 +188,65 @@ window.dmtool.ui = function( dmToolModel ) {
         $('#popupEdit').on('popupbeforeposition', function () { self.datafillEditCreatureListPopup('popupEditPc', 'popup', 'popupEditCreature', self.dmModel.getPcList()) });
         $('#popupEdit').on('popupbeforeposition', function () { self.datafillEditCreatureListPopup('popupEditNpc', 'popup', 'popupEditCreature', self.dmModel.getNpcList() ) });
         $('#popupEdit').on('popupbeforeposition', function () { self.datafillPopup('#popupEditEncounter', 'popup', '#popupEditEncounter', self.dmModel.getEncounterList() ) });
-        $('#popupAdd').on('popupbeforeposition', function () { self.datafillPopup('#popupAddEncounter', 'dialog', '#popupAddEncounter', self.dmModel.getEncounterList() ) });
-        $('#popupAddCreatureInitiativeSubmit').on('click', function () { self.submitAddCreatureToEncounter() });
 
-        $('#popupCreatePc').on('click', function () { self.clickCreatePc() });
-        $('#popupCreateNpc').on('click', function () { self.clickCreateNpc() });
+        $('#addCreature_popup_submit').on('click', function () { self.submitAddCreatureToEncounter() });
 
-        $('#createCreatureSubmitButton').on('click', function () { self.submitCreateCreature() });
-        $('#createEncounterButton').on('click', function () { self.submitCreateEncounter() });
+        $('#createPc_listItem').on('click', function () { self.clickCreatePc() });
+        $('#createNpc_listItem').on('click', function () { self.clickCreateNpc() });
+        $('#createEncounter_listItem').on('click', function () { self.clickCreateEncounter() });
 
-//  For asking initiative
-        $('#popupAdd').on('popupbeforeposition', function () { self.datafillAddCreatureListPopup('popupAddPc', 'popup', 'popupAddCreature', self.dmModel.getNonactivePcList() ) });
-        $('#popupAdd').on('popupbeforeposition', function () { self.datafillAddCreatureListPopup('popupAddNpc', 'popup', 'popupAddCreature', self.dmModel.getNonactiveNpcList() ) });
+        $('#createCreature_button_submit').on('click', function () { self.submitCreateCreature() });
+        $('#createEncounter_button_submit').on('click', function () { self.submitCreateEncounter() });
+
+        $('#create_button').on('click', function () { self.clickCreateButton() } );
+        $('#add_button').on('click', function () { self.clickAddButton() } );
     }
 
     self.submitAddCreatureToEncounter = function() {
-        var initiative = $( '#popupAddCreatureInitiative' ).val();
-        var creatureId = $( '#popupAddCreatureInitiative_CreatureId' ).val();
+        var initiative = $( '#addCreature_popup_initiative' ).val();
+        var creatureId = $( '#addCreature_popup_creatureId' ).val();
         var creatureData = self.dmModel.getCreatureDataFromId(creatureId);
         creatureData['initiative'] = initiative;
         self.dmModel.addCreatureToActiveEncounter(creatureId);
-        $( "#popupAddCreature" ).popup( "close" );
+        $( "#addCreature_popup" ).popup( "close" );
         self.refreshEncounterList();
     }
 
-    self.clickCreatePc = function () {
-        var encounterName = $( '#popupCreateCreature_type' ).val('pc');
+    self.clickAddButton = function() {
+        self.datafillAddCreatureListPopup('addPc_listItemDiv', 'popup', 'addCreature_popup', self.dmModel.getNonactivePcList() );
+        self.datafillAddCreatureListPopup('addNpc_listItemDiv', 'popup', 'addCreature_popup', self.dmModel.getNonactiveNpcList() );
+        self.datafillPopup('#addEncounter_listItemDiv', 'dialog', '#addEncounter_listItemDiv', self.dmModel.getEncounterList() )
+        $( '#add_popup' ).popup( 'open', { 'positionTo' : '#add_button' } );
+    }
+
+    self.clickCreateButton = function() {
+        $( '#create_popup' ).popup( 'open', { 'positionTo' : '#create_button' } );
+    }
+
+    self.clickCreatePc = function () {  
+        $( '#create_popup' ).popup( 'close' );
+        $( '#createCreature_popup_type' ).val('pc');
+        setTimeout( function(){ $( '#createCreature_popup' ).popup( 'open' ) }, 100 );
     }
 
     self.clickCreateNpc = function () {
-        var encounterName = $( '#popupCreateCreature_type' ).val('npc');
+        $( '#create_popup' ).popup( 'close' );
+        $( '#createCreature_popup_type' ).val('npc');
+        setTimeout( function(){ $( '#createCreature_popup' ).popup( 'open' ) }, 100 );
+    }
+
+    self.clickCreateEncounter = function () {
+        $( '#create_popup' ).popup( 'close' );
+        setTimeout( function(){ $( '#createEncounter_popup' ).popup( 'open' ) }, 100 );
     }
 
     //  Init Edit Creature Popup
-    self.initPopupAddCreature = function( id, creatureData ) {
-       self.datafillCreatureFields('popupAdCreature', creatureData); 
-        $( '#popupAddCreatureInitiative_CreatureId' ).val(creatureData['id']);
-        $('#addCreatureSubmitButton').off('click');
-        $('#addCreatureSubmitButton').on('click', function() { 
-            $( "#popupAddCreature" ).popup( "close" );
-            submitCreatureData = self.fetchCreatureDataFromFields('popupAddCreature');
-            self.dmModel.addCreature( id, submitCreatureData );
+    self.initPopupAddCreature = function( creatureData ) {
+        $('#addCreature_popup_creatureId').val(creatureData['id']);
+        $('#addCreature_popup_submit').off('click');
+        $('#addCreature_popup_submit').on('click', function() { 
+            $( "#addCreature_popup" ).popup( "close" );
+            self.dmModel.addCreatureToActiveEncounter( createData['id'] );
             self.refreshEncounterList();
         });
     }
@@ -270,10 +293,16 @@ window.dmtool.ui = function( dmToolModel ) {
         }
     }
 
-    self.datafillAddCreatureFormPopup = function(id) { 
+    self.datafillAddCreatureFormPopup = function(creatureId) { 
         return function() {
-            var creatureData = self.dmModel.getCreatureDataFromId(id);
-            self.initPopupAddCreature(id, creatureData); 
+            $('#addCreature_popup_creatureId').val(creatureId);
+            $('#addCreature_popup_submit').off('click');
+            $('#addCreature_popup_submit').on('click', function() { 
+                $( "#addCreature_popup" ).popup( "close" );
+                self.dmModel.addCreatureToActiveEncounter( creatureId );
+                self.refreshEncounterList();
+            });
+
         }
     }
 
@@ -301,12 +330,12 @@ window.dmtool.ui = function( dmToolModel ) {
 
     self.submitCreateCreature = function() {
         //  Probably shouldn't close both.  
-        $( "#popupCreateCreature" ).popup( "close" );
-        createCreatureData = self.fetchCreatureDataFromFields('popupCreateCreature');
+        $( "#createCreature_popup" ).popup( "close" );
+        createCreatureData = self.fetchCreatureDataFromFields('createCreature_popup');
         createCreatureData['id'] = self.dmModel.nextCreatureListId;
         createCreatureData['initiative'] = 0;
         createCreatureData['imgUrl'] = 'img/nibbler.jpg';
-        createCreatureData['type'] = $('#popupCreateCreature_type').val();
+        createCreatureData['type'] = $('#createCreature_popup_type').val();
 
         self.dmModel.creatureList[ self.dmModel.nextCreatureListId ] = createCreatureData;
         self.dmModel.nextCreatureListId++;
@@ -314,7 +343,7 @@ window.dmtool.ui = function( dmToolModel ) {
 
     self.initializeAddCreature = function() {
         $(function(){
-            $('#popupAddCreatureInitiative').scroller({
+            $('#addCreature_popup_initiative').scroller({
                 preset: 'select',
                 theme: 'default',
                 display: 'inline',
@@ -323,14 +352,14 @@ window.dmtool.ui = function( dmToolModel ) {
             });
 
             //  Stupid mobiscroll.  Why do you add this dummy thing?
-            $('#popupAddCreatureInitiative_dummy').hide();
+            $('#addCreature_popup_initiative_dummy').hide();
         });
 
     }
 
     self.refreshEncounterList = function() {
         self.clearEncounterCreatureList();
-        activeCreatureList = dmToolModel.getCreatureListFromEncounter(self.dmModel.activeEncounterId);
+        activeCreatureList = dmToolModel.getCreatureListFromEncounterId(self.dmModel.activeEncounterId);
         sortedCreatureList = activeCreatureList.sort(self.sortByInitiative);
         for ( var creatureId in sortedCreatureList ) {
             self.addCreatureTextToEncounterList(creatureId, sortedCreatureList[creatureId]);
