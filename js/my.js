@@ -221,8 +221,15 @@ window.dmtool.ui = function( dmToolModel ) {
     self.clickEditButton = function() {
         self.datafillEditCreatureListPopup('editPc_listItemDiv', 'popup', 'editCreature_popup', self.dmModel.getPcList() );
         self.datafillEditCreatureListPopup('editNpc_listItemDiv', 'popup', 'editCreature_popup', self.dmModel.getNpcList() );
-        self.datafillPopupList('editEncounter_list', 'dialog', self.dmModel.getEncounterList(), self.clickEditEncounter() )
+        self.datafillPopupList('editEncounter_list', 'dialog', self.dmModel.getEncounterList(), self.initPopupEditEncounter )
         $( '#edit_popup' ).popup( 'open', { 'positionTo' : '#edit_button' } );
+    }
+
+    self.clickAddButton = function() {
+        self.datafillAddCreatureListPopup('addPc_listItemDiv', 'popup', 'addCreature_popup', self.dmModel.getNonactivePcList() );
+        self.datafillAddCreatureListPopup('addNpc_listItemDiv', 'popup', 'addCreature_popup', self.dmModel.getNonactiveNpcList() );
+        self.datafillPopupList('addEncounter_list', 'dialog', self.dmModel.getEncounterList(), self.initPopupAddEncounter );
+        $( '#add_popup' ).popup( 'open', { 'positionTo' : '#add_button' } );
     }
 
     self.datafillPopupList = function(divId, dataRel, list, onClickCallback) {
@@ -232,31 +239,14 @@ window.dmtool.ui = function( dmToolModel ) {
             var name = list[id]['name'];
             var li = '<li><a href="#" id="' + domId + '" data-position-to="window" class="ui-btn-left" data-rel="' + dataRel + '">' + name + '</a></li>';
             $('#' + divId ).append(li).listview('refresh');
-            $('#' + domId).on('click', onClickCallback(list[id]['id']));
+            $('#' + domId).on('click', self.clickClosureGenerator(onClickCallback, list[id]['id']));
         }
     }
 
-    self.clickEditEncounter = function() {
-        return function( encounterId ) {
-            return function() {
-                self.initPopupEditEncounter( encounterId );
-            }
-        };
-    }
-
-    self.clickAddEncounter = function() {
-        return function( encounterId ) {
-            return function() {
-                self.initPopupAddEncounter( encounterId );
-            }
-        };
-    }
-
-    self.clickAddButton = function() {
-        self.datafillAddCreatureListPopup('addPc_listItemDiv', 'popup', 'addCreature_popup', self.dmModel.getNonactivePcList() );
-        self.datafillAddCreatureListPopup('addNpc_listItemDiv', 'popup', 'addCreature_popup', self.dmModel.getNonactiveNpcList() );
-        self.datafillPopupList('addEncounter_list', 'dialog', self.dmModel.getEncounterList(), self.clickAddEncounter() )
-        $( '#add_popup' ).popup( 'open', { 'positionTo' : '#add_button' } );
+    self.clickClosureGenerator = function ( callback, id ) {
+        return function() {
+            callback(id);
+        }
     }
 
     self.clickCreateButton = function() {
