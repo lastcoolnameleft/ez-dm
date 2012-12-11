@@ -226,8 +226,8 @@ window.dmtool.ui = function( dmToolModel ) {
     }
 
     self.clickAddButton = function() {
-        self.datafillAddCreatureListPopup('addPc_listItemDiv', 'popup', 'addCreature_popup', self.dmModel.getNonactivePcList() );
-        self.datafillAddCreatureListPopup('addNpc_listItemDiv', 'popup', 'addCreature_popup', self.dmModel.getNonactiveNpcList() );
+        self.datafillPopupList('addPc_list', 'popup', self.dmModel.getNonactivePcList(), self.initPopupAddCreature );
+        self.datafillPopupList('addNpc_list', 'popup', self.dmModel.getNonactiveNpcList(), self.initPopupAddCreature );
         self.datafillPopupList('addEncounter_list', 'dialog', self.dmModel.getEncounterList(), self.initPopupAddEncounter );
         $( '#add_popup' ).popup( 'open', { 'positionTo' : '#add_button' } );
     }
@@ -306,12 +306,13 @@ window.dmtool.ui = function( dmToolModel ) {
     }
 
     //  Init Edit Creature Popup
-    self.initPopupAddCreature = function( creatureData ) {
-        $('#addCreature_popup_creatureId').val(creatureData['id']);
+    self.initPopupAddCreature = function( creatureId ) {
+        self.popupReplace( '#add_popup', '#addCreature_popup' );
+        $('#addCreature_popup_creatureId').val(creatureId);
         $('#addCreature_popup_submit').off('click');
         $('#addCreature_popup_submit').on('click', function() { 
             $( "#addCreature_popup" ).popup( "close" );
-            self.dmModel.addCreatureToActiveEncounter( createData['id'] );
+            self.dmModel.addCreatureToActiveEncounter( creatureId );
             self.refreshEncounterList();
         });
     }
