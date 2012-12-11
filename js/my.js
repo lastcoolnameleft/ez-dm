@@ -221,20 +221,9 @@ window.dmtool.ui = function( dmToolModel ) {
     self.clickEditButton = function() {
         self.datafillEditCreatureListPopup('editPc_listItemDiv', 'popup', 'editCreature_popup', self.dmModel.getPcList() );
         self.datafillEditCreatureListPopup('editNpc_listItemDiv', 'popup', 'editCreature_popup', self.dmModel.getNpcList() );
-//        self.datafillPopup('#editEncounter_listItemDiv', 'dialog', '#editEncounter_listItemDiv', self.dmModel.getEncounterList() );
         self.datafillPopupList('editEncounter_list', 'dialog', self.dmModel.getEncounterList(), self.clickEditEncounter() )
-
-//        self.datafillPopup('#editEncounter_listItemDiv', 'dialog', '#editEncounter_listItemDiv', self.dmModel.getEncounterList(), self.clickEditEncounter() )
         $( '#edit_popup' ).popup( 'open', { 'positionTo' : '#edit_button' } );
     }
-
-    self.datafillPopup = function(divId, dataRel, link, list) {
-        $(divId + ' ul').html('');
-        for ( var id in list) {
-            $(divId + ' ul').append('<li><a href="' + link + '" data-position-to="window" class="ui-btn-left" data-rel="' + dataRel + '">' + list[id]['name'] + '</a></li>').listview('refresh');
-        }
-    }
-
 
     self.datafillPopupList = function(divId, dataRel, list, onClickCallback) {
         $('#' + divId ).html('');
@@ -275,20 +264,17 @@ window.dmtool.ui = function( dmToolModel ) {
     }
 
     self.clickCreatePc = function () {  
-        $( '#create_popup' ).popup( 'close' );
         $( '#createCreature_popup_type' ).val('pc');
-        setTimeout( function(){ $( '#createCreature_popup' ).popup( 'open' ) }, 100 );
+        self.popupReplace( '#create_popup', '#createEncounter_popup' );
     }
 
     self.clickCreateNpc = function () {
-        $( '#create_popup' ).popup( 'close' );
         $( '#createCreature_popup_type' ).val('npc');
-        setTimeout( function(){ $( '#createCreature_popup' ).popup( 'open' ) }, 100 );
+        self.popupReplace( '#create_popup', '#createEncounter_popup' );
     }
 
     self.clickCreateEncounter = function () {
-        $( '#create_popup' ).popup( 'close' );
-        setTimeout( function(){ $( '#createEncounter_popup' ).popup( 'open' ) }, 100 );
+        self.popupReplace( '#create_popup', '#createEncounter_popup' );
     }
 
     self.popupReplace = function( closePopupDiv, openPopupDiv ) {
@@ -353,13 +339,6 @@ window.dmtool.ui = function( dmToolModel ) {
     }
 
     
-    self.datafillPopup = function(divId, dataRel, link, list) {
-        $(divId + ' ul').html('');
-        for ( var id in list) {
-            $(divId + ' ul').append('<li><a href="' + link + '" data-position-to="window" class="ui-btn-left" data-rel="' + dataRel + '">' + list[id]['name'] + '</a></li>').listview('refresh');
-        }
-    }
-
     self.datafillAddCreatureListPopup = function(divId, dataRel, link, list) {
         $('#' + divId + ' ul').html('');
         for ( var id in list) {
