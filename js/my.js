@@ -178,8 +178,8 @@ window.dmtool.ui = function( dmToolModel ) {
     self.addCreatureTextToEncounterList = function (id, creatureInfo) { 
         var popupEditPcEncounterId = 'popupEditPcEncounter_' + id;
         var liCount = '<span class="ui-li-count">AC: ' + creatureInfo['ac'] + ' For: ' + creatureInfo['fortitude'] + ' Ref: ' + creatureInfo['reflex'] + ' Wil: ' + creatureInfo['will'] + '</span>';
-        var liRightLink = '<a href="#popupEditCreature" data-rel="popup" data-position-to="window" id="' + popupEditPcEncounterId + '"></a>';
         var liLeftLink = '<a href="#popupEditPcEncounter" data-rel="popup"><img src="' + creatureInfo['imgUrl'] + '" /><h1>' + creatureInfo['name'] + '</h1><p>HP:' + creatureInfo['currentHp'] + '/' + creatureInfo['maxHp'] + ' Init:' + creatureInfo['initiative'] + '</p>' + liCount + '</a>';
+        var liRightLink = ''; //'<a href="#popupEditCreature" data-rel="popup" data-position-to="window" id="' + popupEditPcEncounterId + '"></a>';
 
         var liString = '<li data-theme="c">' + liLeftLink + liRightLink + '</li>';
 
@@ -219,8 +219,8 @@ window.dmtool.ui = function( dmToolModel ) {
     }
 
     self.clickEditButton = function() {
-        self.datafillEditCreatureListPopup('editPc_listItemDiv', 'popup', 'editCreature_popup', self.dmModel.getPcList() );
-        self.datafillEditCreatureListPopup('editNpc_listItemDiv', 'popup', 'editCreature_popup', self.dmModel.getNpcList() );
+        self.datafillPopupList('editPc_list', 'popup', self.dmModel.getPcList(), self.initPopupEditCreature );
+        self.datafillPopupList('editNpc_list', 'popup', self.dmModel.getNpcList(), self.initPopupEditCreature );
         self.datafillPopupList('editEncounter_list', 'dialog', self.dmModel.getEncounterList(), self.initPopupEditEncounter )
         $( '#edit_popup' ).popup( 'open', { 'positionTo' : '#edit_button' } );
     }
@@ -318,9 +318,12 @@ window.dmtool.ui = function( dmToolModel ) {
     }
 
     //  Init Edit Creature Popup
-    self.initPopupEditCreature = function( id, creatureData ) {
-       self.datafillCreatureFields('editCreature_popup', creatureData); 
-        $('#editCreature_button_submit').off('click');
+    self.initPopupEditCreature = function( id ) {
+        self.popupReplace( '#edit_popup', '#editCreature_popup' );
+		var creatureData = self.dmModel.getCreatureDataFromId( id );
+		self.datafillCreatureFields('editCreature_popup', creatureData); 
+		$('#editCreature_button_submit').off('click');
+
         $('#editCreature_button_submit').on('click', function() { 
             $( "#editCreature_popup" ).popup( "close" );
             submitCreatureData = self.fetchCreatureDataFromFields('editCreature_popup');

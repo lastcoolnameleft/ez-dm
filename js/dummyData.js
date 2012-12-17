@@ -19,7 +19,7 @@ window.dmtool.datafill = function(model, ui) {
     }
 
     self.setDummyData = function(model) {
-        model.activeEncounterId = 3;
+        model.activeEncounterId = 2;
 
         model.nextEncounterListId = 9;
         model.encounterList = {
