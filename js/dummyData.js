@@ -4,13 +4,16 @@ window.dmtool.datafill = function(model, ui) {
     self.ui = ui;
 
     self.sampleCreatureData = {
-        'name' : 'Mr. Creature',
-        'level' : 8,
-        'maxHp' : 200,
-        'ac' : 23,
+        'name'      : 'Mr. Creature',
+        'level'     : 8,
+        'maxHp'     : 200,
+        'ac'        : 23,
         'fortitude' : 19,
-        'reflex' : 17,
-        'will' : 18,
+        'reflex'    : 17,
+        'will'      : 18,
+        'imgUrl'    : 'img/fry.jpg',
+        'currentHp' : 200,
+        'initiative': 18,
     }
 
     self.datafillCreateFields = function() {
