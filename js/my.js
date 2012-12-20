@@ -1,6 +1,5 @@
 window.dmtool = {};
 
-
 window.dmtool.app = function () {
     var self = this;
 
@@ -163,10 +162,6 @@ window.dmtool.ui = function( dmToolModel ) {
         self.dmModel.createEncounter(encounterName);     
     }
 
-    self.clearEncounterCreatureList = function() {
-        $( '#encounterCreatureList' ).empty();
-    }
-
     self.addEditCreatureTextToEncounterList = function ( creatureInfo ) { 
         var editEncounterCreatureDomId = 'editEncounterCreature_listItem_' + creatureInfo['id'];
         var liCount = '<span class="ui-li-count">AC: ' + creatureInfo['ac'] + ' For: ' + creatureInfo['fortitude'] + ' Ref: ' + creatureInfo['reflex'] + ' Wil: ' + creatureInfo['will'] + '</span>';
@@ -225,6 +220,14 @@ window.dmtool.ui = function( dmToolModel ) {
         $('#add_button').on('click', function () { self.clickAddButton() } );
         $('#edit_button').on('click', function () { self.clickEditButton() } );
         $('#remove_button').on('click', function () { self.clickRemoveButton() } );
+        $('#popupEditCreatureEncounterHurt').on('click', function () { self.clickPopupEditCreatureEncounterHurt() } );
+        $('#popupEditCreatureEncounterHeal').on('click', function () { self.clickPopupEditCreatureEncounterHurt() } );
+    }
+
+    self.clickPopupEditCreatureEncounterHeal = function () {
+    }
+
+    self.clickPopupEditCreatureEncounterHurt = function () {
     }
 
     self.submitAddCreatureToEncounter = function() {
@@ -238,16 +241,17 @@ window.dmtool.ui = function( dmToolModel ) {
     }
 
     self.clickRemoveButton = function() {
-        $('#remove_button').buttonMarkup({ theme: "b" });
-        $('#remove_button  .ui-btn-text').text('Done');
+//        $('#remove_button').buttonMarkup({ theme: "b" });
+        $('#remove_button .ui-btn-text').text('Done');
         $('#remove_button').off('click');
         $('#remove_button').on('click', function () { self.clickDoneRemoveButton() } );
         self.refreshEditEncounterList();
     }
 
     self.clickDoneRemoveButton = function() {
-        $('#remove_button  .ui-btn-text').text('Remove');
-        $('#remove_button').buttonMarkup({ theme: "a" });
+        $('#remove_button .ui-btn-text').text('Remove');
+//  Can't make this work properly.  Just leave blue
+//        $('#remove_button').buttonMarkup({ theme: "a" });
         $('#remove_button').off('click');
         $('#remove_button').on('click', function () { self.clickRemoveButton() } );
         self.refreshEncounterList();
@@ -463,7 +467,7 @@ window.dmtool.ui = function( dmToolModel ) {
 
     self.doRefreshEncounterList = function( displayCreatureTextFunction ) {
         self.setEncounterName(self.dmModel.getEncounterDataFromEncounterId(self.dmModel.activeEncounterId)['name']);
-        self.clearEncounterCreatureList();
+        $( '#encounterCreatureList' ).empty();
         var activeCreatureList = dmToolModel.getCreatureListFromEncounterId(self.dmModel.activeEncounterId);
         var sortedCreatureList = activeCreatureList.sort(self.sortByInitiative);
         for ( var creatureId in sortedCreatureList ) {
@@ -474,7 +478,6 @@ window.dmtool.ui = function( dmToolModel ) {
     self.sortByInitiative = function(a, b) {
         return( b.initiative - a.initiative );
     }
-
 
     return self;
 };

@@ -139,22 +139,14 @@
         <div data-role="popup" id="popupEditCreatureEncounter" data-theme="a" class="ui-corner-all">
             <form>
                 <div style="padding:10px 20px;">
-                    <h3>HP:</h3>
                     <div class="ui-grid-b">
-                        <div class="ui-block-a"><a href="#" data-role="button" data-mini="true">+1</a></div>
-                        <div class="ui-block-b"><a href="#" data-role="button" data-mini="true">10HP</a></div>
-                        <div class="ui-block-c"><a href="#" data-role="button" data-mini="true">-1</a></div>
-                    </div>
-                    <div class="ui-grid-b">
-                        <div class="ui-block-a"><a href="index.html" data-role="button" data-mini="true">&#x2191;</a></div>
+                        <div class="ui-block-a"><a href="#" data-role="button" data-mini="true" id='popupEditCreatureEncounterHurt'>Hurt</a></div>
                         <div class="ui-block-b"><label for="basic"></label><input type="text" name="name" id="basic" value="" data-mini="true" /></div>
-                        <div class="ui-block-c"><a href="index.html" data-role="button" data-mini="true">&#x2193;</a></div>
+                        <div class="ui-block-c"><a href="#" data-role="button" data-mini="true" id='popupEditCreatureEncounterHeal'>Heal</a></div>
                     </div>
 
-                    <h3>Initiative:</h3>
-                    <label for="level" class="ui-hidden-accessible">Initiative:</label>
-                    <input type="text" name="level" id="editPcInitiative" value="" placeholder="Initiative" />
-                    <input type="button" name="submit" value="submit" id='editPcEncounterButton' data-theme="b" />
+                    <label for="slider-1">Initiative:</label>
+                    <input type="range" name="initiative" id="initiative" value="18" min="0" max="30" />
                 </div>
             </form>
         </div>
@@ -228,7 +220,7 @@
       <div data-theme="a" data-role="footer" data-position="fixed">
         <a data-role="button" href="#" data-rel="popup" class="ui-btn-left" id='create_button' data-position-to="origin">Create</a>
         <h3></h3>
-        <a data-role="button" href="#" data-rel="popup" class="ui-btn-right" id='remove_button' data-position-to="origin">Remove</a>
+        <a data-role="button" href="#" data-rel="popup" class="ui-btn-right" id='remove_button' data-theme='b' data-position-to="origin">Remove</a>
       </div>
   <!-- Start Footer -->
       </div>
