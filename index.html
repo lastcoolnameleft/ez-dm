@@ -141,12 +141,17 @@
                 <div style="padding:10px 20px;">
                     <div class="ui-grid-b">
                         <div class="ui-block-a"><a href="#" data-role="button" data-mini="true" id='popupEditCreatureEncounterHurt'>Hurt</a></div>
-                        <div class="ui-block-b"><label for="basic"></label><input type="text" name="name" id="basic" value="" data-mini="true" /></div>
+                        <div class="ui-block-b"><label for="basic"></label><input type="text" name="name" id="popupEditCreatureEncounterValue" value="1" data-mini="true" /></div>
                         <div class="ui-block-c"><a href="#" data-role="button" data-mini="true" id='popupEditCreatureEncounterHeal'>Heal</a></div>
                     </div>
 
                     <label for="slider-1">Initiative:</label>
-                    <input type="range" name="initiative" id="initiative" value="18" min="0" max="30" />
+                    <input type="range" name="initiative" id="popupEditCreatureEncounterInitiative" value="18" min="0" max="30" />
+                    <div class="ui-grid-b">
+                        <div class="ui-block-a"></div>
+                        <div class="ui-block-b"><input type="button" name="submitEditCreatureEncounter" id="popupEditCreatureEncounterSubmit" value="Submit" data-mini="true"/></div>
+                        <div class="ui-block-c"></div>  
+                    </div>
                 </div>
             </form>
         </div>

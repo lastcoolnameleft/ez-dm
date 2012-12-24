@@ -66,6 +66,18 @@ window.dmtool.model = function () {
         return creatureList;
     }
 
+    self.updateInitiative = function( creatureId, initiative ) {
+        self.getCreatureDataFromId( creatureId ).initiative = parseInt(initiative);
+    }
+
+    self.addHitPoints = function( creatureId, hitPoints ) {
+        self.getCreatureDataFromId( creatureId ).currentHp += parseInt(hitPoints);
+    }
+
+    self.removeHitPoints = function( creatureId, hitPoints ) {
+        self.getCreatureDataFromId( creatureId ).currentHp -= parseInt(hitPoints);
+    }
+
     self.setActiveEncounterId = function ( encounterId ) {
         self.activeEncounterId = encounterId;
     }
@@ -197,7 +209,37 @@ window.dmtool.ui = function( dmToolModel ) {
         return function() {
             self.datafillEditCreatureFormPopup(creatureId);
             $( '#popupEditCreatureEncounter' ).popup( 'open' );
+            $( '#popupEditCreatureEncounterHurt' ).off( 'click' );
+            $( '#popupEditCreatureEncounterHeal' ).off( 'click');
+            $( '#popupEditCreatureEncounterSubmit' ).off( 'click' );
+            $( '#popupEditCreatureEncounterHurt' ).on( 'click', self.clickPopupEditCreatureEncounterHurt( creatureId ) );
+            $( '#popupEditCreatureEncounterHeal' ).on( 'click', self.clickPopupEditCreatureEncounterHeal( creatureId ) );
+            $( '#popupEditCreatureEncounterSubmit' ).on( 'click', self.clickPopupEditCreatureEncounterSubmit( creatureId ) );
         };
+    }
+
+    self.clickPopupEditCreatureEncounterSubmit = function ( creatureId ) {
+        return function() {
+            $( '#popupEditCreatureEncounter' ).popup( 'close' );
+            self.dmModel.updateInitiative( creatureId, $( '#popupEditCreatureEncounterInitiative' ).val() );
+            self.refreshEncounterList();
+        }
+    }
+
+    self.clickPopupEditCreatureEncounterHeal = function ( creatureId ) {
+        return function() {
+            $( '#popupEditCreatureEncounter' ).popup( 'close' );
+            self.dmModel.addHitPoints( creatureId, $( '#popupEditCreatureEncounterValue' ).val() );
+            self.refreshEncounterList();
+        }
+    }
+
+    self.clickPopupEditCreatureEncounterHurt = function ( creatureId ) {
+        return function() {
+            $( '#popupEditCreatureEncounter' ).popup( 'close' );
+            self.dmModel.removeHitPoints( creatureId, $( '#popupEditCreatureEncounterValue' ).val() );
+            self.refreshEncounterList();
+        }
     }
 
     self.setEncounterName = function(encounterName) {
@@ -220,14 +262,6 @@ window.dmtool.ui = function( dmToolModel ) {
         $('#add_button').on('click', function () { self.clickAddButton() } );
         $('#edit_button').on('click', function () { self.clickEditButton() } );
         $('#remove_button').on('click', function () { self.clickRemoveButton() } );
-        $('#popupEditCreatureEncounterHurt').on('click', function () { self.clickPopupEditCreatureEncounterHurt() } );
-        $('#popupEditCreatureEncounterHeal').on('click', function () { self.clickPopupEditCreatureEncounterHurt() } );
-    }
-
-    self.clickPopupEditCreatureEncounterHeal = function () {
-    }
-
-    self.clickPopupEditCreatureEncounterHurt = function () {
     }
 
     self.submitAddCreatureToEncounter = function() {
